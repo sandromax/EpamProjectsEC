@@ -29,6 +29,10 @@ public class Plan {
         this.customers = customers;
     }
 
+    public static double getFEE() {
+        return FEE;
+    }
+
     public boolean newCustomer(String name, String lastName, boolean isHuman) {
         Customer customer = new Customer(name, lastName, isHuman);
         customers.add(customer);

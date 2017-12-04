@@ -21,5 +21,5 @@ public class Model {
         allPlans.add(new BusinessPlatinum(CustomeRandomMaker.getMore(numberClientsBusinessPlatinum)));
     }
 
-    
+
 }
