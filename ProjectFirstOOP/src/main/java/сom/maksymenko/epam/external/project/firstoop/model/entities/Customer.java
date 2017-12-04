@@ -27,4 +27,16 @@ public class Customer {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public boolean isHuman() {
+        return isHuman;
+    }
+
 }
