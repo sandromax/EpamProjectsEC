@@ -8,17 +8,22 @@ import сom.maksymenko.epam.external.project.firstoop.model.entities.PrepaidPlan
 import java.util.List;
 
 public class NetFree extends PrepaidPlan {
-    static {
-        FEE = 95.0;
-        CALLS = new Calls("unlimited", "6000.0", 0.6);
-        INTERNET = new Internet("6000", 0.01);
-    }
+//    {
+//        fee = 95.0;
+//        calls = new Calls("unlimited", "6000.0", 0.6);
+//        internet = new Internet("6000", 0.01);
+//    }
 
     public NetFree() {
-
+        fee = 95.0;
+        calls = new Calls("unlimited", "6000.0", 0.6);
+        internet = new Internet("6000", 0.01);
     }
 
     public NetFree(List<Customer> customers) {
         this.customers = customers;
+        fee = 95.0;
+        calls = new Calls("unlimited", "6000.0", 0.6);
+        internet = new Internet("6000", 0.01);
     }
 }

@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Plan {
-    protected static double FEE;
+    protected double fee;
     protected List<Customer> customers;
-    protected static Calls CALLS;
-    protected static Internet INTERNET;
+    protected Calls calls;
+    protected Internet internet;
 
     public Plan() {
-        FEE = 0.0;
+        fee = 0.0;
         customers = new ArrayList<Customer>();
-        CALLS = new Calls();
-        INTERNET = new Internet();
+        calls = new Calls();
+        internet = new Internet();
     }
 
-    public Plan(double FEE, Calls CALLS, Internet INTERNET) {
-        this.FEE = FEE;
-        this.CALLS = CALLS;
-        this.INTERNET = INTERNET;
-    }
+//    public Plan(double fee, Calls calls, Internet internet) {
+//        this.fee = fee;
+//        this.calls = calls;
+//        this.internet = internet;
+//    }
+//
+//    public Plan(double fee, Calls calls, Internet internet, List<Customer> customers) {
+//        this.fee = fee;
+//        this.calls = calls;
+//        this.internet = internet;
+//        this.customers = customers;
+//    }
 
-    public Plan(double FEE, Calls CALLS, Internet INTERNET, List<Customer> customers) {
-        this.FEE = FEE;
-        this.CALLS = CALLS;
-        this.INTERNET = INTERNET;
-        this.customers = customers;
-    }
-
-    public static double getFee() {
-        return FEE;
+    public double getFee() {
+        return fee;
     }
 
     public int getNumberOfCustomers() {

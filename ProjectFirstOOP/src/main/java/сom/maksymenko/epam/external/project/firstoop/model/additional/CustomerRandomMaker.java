@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class CustomeRandomMaker {
+public class CustomerRandomMaker {
 
     private static String[] names = {"John", "William", "Bob", "Sylvester", "Arnold"};
     private static String[] lastNames = {"Ford", "Dodge", "Armstrong", "Franklin", "Roosevelt"};

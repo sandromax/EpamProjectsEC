@@ -8,19 +8,26 @@ import static сom.maksymenko.epam.external.project.firstoop.model.entities.Free
 
 
 public class NetFreePlus extends PrepaidPlan {
-    static {
-        FEE = 155.0;
-        CALLS = new Calls("unlimited", "18000", 0.6);
-        INTERNET = new Internet("unlimited");
-        FREE_RESOURCES = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
+    {
+        fee = 155.0;
+        calls = new Calls("unlimited", "18000", 0.6);
+        internet = new Internet("unlimited");
+        freeNetResources = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 
     public NetFreePlus() {
-
+        fee = 155.0;
+        calls = new Calls("unlimited", "18000", 0.6);
+        internet = new Internet("unlimited");
+        freeNetResources = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 
     public NetFreePlus(List<Customer> customers) {
         this.customers = customers;
+        fee = 155.0;
+        calls = new Calls("unlimited", "18000", 0.6);
+        internet = new Internet("unlimited");
+        freeNetResources = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 
 }
