@@ -10,7 +10,7 @@ import java.util.List;
 public class SpeakFree extends PrepaidPlan {
 
     static {
-        FEE = 45;
+        FEE = 45.0;
         CALLS = new Calls("unlimited", "0", 0.6);
         INTERNET = new Internet("500", 0.01);
     }

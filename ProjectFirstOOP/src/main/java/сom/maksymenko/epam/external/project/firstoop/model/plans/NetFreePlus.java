@@ -9,9 +9,9 @@ import static сom.maksymenko.epam.external.project.firstoop.model.entities.Free
 
 public class NetFreePlus extends PrepaidPlan {
     static {
-        FEE = 155;
+        FEE = 155.0;
         CALLS = new Calls("unlimited", "18000", 0.6);
-        INTERNET = new Internet("unlimited", 0.01);
+        INTERNET = new Internet("unlimited");
         FREE_RESOURCES = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 

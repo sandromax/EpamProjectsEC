@@ -9,8 +9,8 @@ import java.util.List;
 
 public class NetFree extends PrepaidPlan {
     static {
-        FEE = 95;
-        CALLS = new Calls("unlimited", "6000", 0.6);
+        FEE = 95.0;
+        CALLS = new Calls("unlimited", "6000.0", 0.6);
         INTERNET = new Internet("6000", 0.01);
     }
 

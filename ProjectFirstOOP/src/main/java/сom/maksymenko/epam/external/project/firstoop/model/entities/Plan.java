@@ -29,8 +29,16 @@ public class Plan {
         this.customers = customers;
     }
 
-    public static double getFEE() {
+    public static double getFee() {
         return FEE;
+    }
+
+    public int getNumberOfCustomers() {
+        return customers.size();
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
     }
 
     public boolean newCustomer(String name, String lastName, boolean isHuman) {
@@ -44,8 +52,6 @@ public class Plan {
         return true;
     }
 
-    public int getNumberOfCustomers() {
-        return customers.size();
-    }
+
 
 }

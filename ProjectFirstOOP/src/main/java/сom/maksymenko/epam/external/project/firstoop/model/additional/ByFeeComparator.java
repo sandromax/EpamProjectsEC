@@ -7,9 +7,8 @@ import java.util.Comparator;
 public class ByFeeComparator implements Comparator<Plan> {
     @Override
     public int compare(Plan firstPlan, Plan secondPlan) {
-            int f = (int) firstPlan.getFEE();
-            int s = (int) secondPlan.getFEE();
-//            return firstPlan.getFEE()
-        return 4;
+            Integer first = (int) firstPlan.getFee();
+            Integer second = (int) secondPlan.getFee();
+            return first.compareTo(second);
     }
 }

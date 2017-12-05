@@ -1,30 +1,52 @@
 package сom.maksymenko.epam.external.project.firstoop;
 
+import сom.maksymenko.epam.external.project.firstoop.model.Model;
 import сom.maksymenko.epam.external.project.firstoop.model.additional.CustomeRandomMaker;
 import сom.maksymenko.epam.external.project.firstoop.model.entities.Customer;
 import сom.maksymenko.epam.external.project.firstoop.model.entities.Plan;
-import сom.maksymenko.epam.external.project.firstoop.model.plans.Business;
+import сom.maksymenko.epam.external.project.firstoop.model.plans.*;
+import сom.maksymenko.epam.external.project.firstoop.view.View;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TestField {
     public static void main(String[] args) {
 
-        List<Customer> newList = new LinkedList<Customer>();
-        newList = CustomeRandomMaker.getMore(33);
+//        List<Customer> newList = new LinkedList<Customer>();
+//        newList = CustomeRandomMaker.getMore(33);
+//
+//        for(Customer c : newList) {
+//            System.out.println(c.getLastName()+c.getName());
+//        }
+//
+//        System.out.println(newList.size());
 
-        for(Customer c : newList) {
-            System.out.println(c.getLastName()+c.getName());
-        }
+//        Plan.getFee();
+//        Business.getFee();
+//        Business b = new Business();
+//        b.getFee();
 
-        System.out.println(newList.size());
+        Model model = new Model(5,6,7,8,9);
 
-        Plan.getFEE();
-        Business.getFEE();
-        Business b = new Business();
-        b.getFEE()
+
+        View view = new View();
+
+//        view.showSet(model.getAllPlans());
+        System.out.println("Sorting...");
+//        view.showList(model.sortPlansByFee());
+
+        SpeakFree speakFree = new SpeakFree();
+        NetFree netFree = new NetFree();
+        NetFreePlus netFreePlus = new NetFreePlus();
+
+        Business business = new Business();
+        BusinessPlatinum businessPlatinum = new BusinessPlatinum();
+
+        Set<? extends Plan> setExtPlan = new HashSet<>();
+        Set<? super Plan> setSupPlan = new HashSet<>();
+
+        
+
 
     }
 

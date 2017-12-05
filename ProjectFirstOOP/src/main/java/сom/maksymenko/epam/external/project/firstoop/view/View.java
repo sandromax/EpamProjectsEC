@@ -1,31 +1,24 @@
 package сom.maksymenko.epam.external.project.firstoop.view;
 
+import сom.maksymenko.epam.external.project.firstoop.model.entities.Plan;
+
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class View {
 
-    public void menu() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.next();
-        while (!command.equals("exit")) {
-            switch (command) {
-                case "clients":{
+    public void showList(List<? extends Plan> list) {
+        for(Plan plan : list) {
+            System.out.println("Plan name: " + plan.getClass().getName() +
+            ", fee: " + plan.getFee() + " ");
+        }
+    }
 
-                    break;
-                }
-                case "sort":{
-
-                    break;
-                }
-                case "find":{
-
-                    break;
-                }
-                default:{
-//                    showCommands();
-                    break;
-                }
-            }
+    public void showSet(Set<? extends Plan> set) {
+        for(Plan plan : set) {
+            System.out.println("Plan name: " + plan.getClass().getName() +
+                    ", fee: " + plan.getFee() + " ");
         }
     }
 

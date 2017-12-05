@@ -8,9 +8,9 @@ import static сom.maksymenko.epam.external.project.firstoop.model.entities.Serv
 
 public class Business extends ContractPlan {
     static {
-        FEE = 150;
+        FEE = 150.0;
         CALLS = new Calls("unlimited", "18000", 0.6);
-        INTERNET = new Internet("unlimited", 0.0);
+        INTERNET = new Internet("unlimited");
         SERVICES = new Service[]{TWO_SIM, TRACKER, FAAVORITE_COUNTRY, PAY_FOR_ME};
     }
 
