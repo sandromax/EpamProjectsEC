@@ -38,7 +38,7 @@ public class Model {
 
     public List<Plan> sortPlansByFee() {
         List<Plan> sortedPlans = new ArrayList<>(allPlans);
-        Collections.sort(sortedPlans, new ByFeeComparator());
+//        Collections.sort(sortedPlans, new ByFeeComparator());
         sortedPlans.sort(new ByFeeComparator());
 
         return sortedPlans;
