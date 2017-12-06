@@ -33,6 +33,14 @@ public class Plan {
         return fee;
     }
 
+    public Calls getCalls() {
+        return calls;
+    }
+
+    public Internet getInternet() {
+        return internet;
+    }
+
     public int getNumberOfCustomers() {
         return customers.size();
     }

@@ -37,4 +37,8 @@ public class Internet {
         }
 
     }
+
+    public String getFreeMBNetLimit() {
+        return freeMBNetLimit;
+    }
 }

@@ -31,8 +31,13 @@ public class Calls {
             }
         }
     }
+
     public Calls(String limit) {
 
+    }
+
+    public String getFreeCallsOutLimit() {
+        return freeCallsOutLimit;
     }
 
 
