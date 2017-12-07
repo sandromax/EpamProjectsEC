@@ -8,7 +8,7 @@ public class Calls {
     private double freeCallsOutBalance;
     private double pricePerSecond;
 
-    public Calls() {
+    {
         freeCallsInLimit = "";
         freeCallsOutLimit = "";
 
@@ -17,8 +17,20 @@ public class Calls {
 
         pricePerSecond = 0.0;
     }
+    public Calls() {
+//        freeCallsInLimit = "";
+//        freeCallsOutLimit = "";
+//
+//        freeCallsInBalance = 0.0;
+//        freeCallsOutBalance = 0.0;
+//
+//        pricePerSecond = 0.0;
+    }
 
     public Calls(String freeCallsInLimit, String freeCallsOutLimit, double pricePerSecond) {
+        this.freeCallsInLimit = freeCallsInLimit;
+        this.freeCallsOutLimit = freeCallsOutLimit;
+
         if(freeCallsInLimit.equals("unlimited")) {
             freeCallsInBalance = 1000000.0;
         } else {

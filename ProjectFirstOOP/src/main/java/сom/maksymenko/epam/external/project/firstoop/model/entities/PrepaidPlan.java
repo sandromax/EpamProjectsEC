@@ -8,9 +8,9 @@ public class PrepaidPlan extends Plan {
         freeNetResources = new FreeNetResources[1];
     }
 
-//    public PrepaidPlan(double fee, Calls calls, Internet internet) {
-//        super(fee, calls, internet);
-//    }
+    public PrepaidPlan(double fee, Calls calls, Internet internet) {
+        super(fee, calls, internet);
+    }
 
 
 }

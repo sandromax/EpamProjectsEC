@@ -44,4 +44,40 @@ public class Model {
         return sortedPlans;
     }
 
+    public Set<Plan> findPlansByMaxFee(Double param) {
+        Set<Plan> result = new HashSet<>();
+
+        for (Plan plan : allPlans) {
+            if((param.equals(plan.getFee())) || (param > plan.getFee()))
+                result.add(plan);
+        }
+
+        return result;
+    }
+    public Set<Plan> findPlansByCalls(String param) {
+        Set<Plan> result = new HashSet<>();
+
+        for (Plan plan : allPlans) {
+            if(param.equals(plan.getCalls().getFreeCallsOutLimit()))
+                result.add(plan);
+            else if ((param.compareTo(plan.getCalls().getFreeCallsOutLimit())) > 0)
+                result.add(plan);
+        }
+
+        return result;
+    }
+
+    public Set<Plan> findPlansByInternet(String param) {
+        Set<Plan> result = new HashSet<>();
+
+        for (Plan plan : allPlans) {
+            if(param.equals(plan.getInternet().getFreeMBNetLimit()))
+                result.add(plan);
+            else if ((param.compareTo(plan.getInternet().getFreeMBNetLimit())) > 0)
+                result.add(plan);
+        }
+
+        return result;
+    }
+
 }

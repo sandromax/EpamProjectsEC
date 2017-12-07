@@ -9,22 +9,19 @@ import java.util.List;
 
 public class SpeakFree extends PrepaidPlan {
 
-//    {
-//        fee = 45.0;
-//        calls = new Calls("unlimited", "0", 0.6);
-//        internet = new Internet("500", 0.01);
-//    }
+    {
+        fee = 45.0;
+        calls = new Calls("unlimited", "300", 0.6);
+        internet = new Internet("500", 0.01);
+    }
 
     public SpeakFree() {
         fee = 45.0;
-        calls = new Calls("unlimited", "0", 0.6);
+        calls = new Calls("unlimited", "300", 0.6);
         internet = new Internet("500", 0.01);
     }
 
     public SpeakFree(List<Customer> customers) {
         this.customers = customers;
-        fee = 45.0;
-        calls = new Calls("unlimited", "0", 0.6);
-        internet = new Internet("500", 0.01);
     }
 }

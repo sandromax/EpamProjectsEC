@@ -9,8 +9,8 @@ public class ContractPlan extends Plan{
         services = new Service[1];
     }
 
-//    public ContractPlan(double fee, Calls calls, Internet internet, double credit) {
-//        super(fee, calls, internet);
-//        this.credit = credit;
-//    }
+    public ContractPlan(double fee, Calls calls, Internet internet, double credit) {
+        super(fee, calls, internet);
+        this.credit = credit;
+    }
 }

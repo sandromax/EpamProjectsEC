@@ -51,7 +51,7 @@ public class View {
     public static void showSet(Set<Plan> set) {
         for(Plan plan : set) {
             System.out.println("Plan name: " + plan.getClass().getSimpleName() +
-                    ", fee: " + plan.getFee() + " ");
+                    ", fee: " + plan.getFee() + " Calls out limit: " + plan.getCalls().getFreeCallsOutLimit() + " Free MB: " + plan.getInternet().getFreeMBNetLimit());
         }
     }
 

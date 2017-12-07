@@ -5,13 +5,17 @@ public class Internet {
     private double freeMBNetBalance;
     private double mbCost;
 
-    public Internet() {
+    {
         freeMBNetLimit = "";
         freeMBNetBalance = 0.0;
         mbCost = 0.0;
     }
 
+    public Internet() {
+    }
+
     public Internet(String freeMBNetLimit) {
+        this.freeMBNetLimit = freeMBNetLimit;
         if(freeMBNetLimit.equals("unlimited")){
             freeMBNetBalance = 1000000.0;
         }else {
@@ -25,6 +29,7 @@ public class Internet {
     }
 
     public Internet(String freeMBNetLimit, double mbCost) {
+        this.freeMBNetLimit = freeMBNetLimit;
         if(freeMBNetLimit.equals("unlimited")){
             freeMBNetBalance = 1000000.0;
             this.mbCost = 0.0;

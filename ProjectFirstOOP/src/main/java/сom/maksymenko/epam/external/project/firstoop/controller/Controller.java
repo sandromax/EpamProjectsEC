@@ -15,9 +15,9 @@ public class Controller {
 
     Model model;
 
-    private String paramFee = "";
-    public String paramCalls = "";
-    String paramInternet = "";
+    private Double paramFee = 0.0;
+    private String paramCalls = "";
+    private String paramInternet = "";
 
     public void launch() {
         model = new Model(10, 20, 30, 5, 1);
@@ -27,7 +27,7 @@ public class Controller {
         String command = "";
         while (!command.equals("exit")) {
             View.showCommands();
-            command = enterCommand();
+            command = enterCommandString();
             switch (command) {
                 case "clients": {
                     View.clientsMenu(model.getNumberAllClients());
@@ -48,36 +48,42 @@ public class Controller {
 
     }
 
-    private String enterCommand() {
+    private String enterCommandString() {
         Scanner scanner = new Scanner(System.in);
         return scanner.next();
     }
 
+    private Double enterCommandDouble() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextDouble();
+    }
+
     private void askParams() {
-        System.out.println("Enter fee max");
-        paramFee = enterCommand();
-        System.out.println("Enter free minutes min");
-        paramCalls = enterCommand();
-        System.out.println("Enter free MB min");
-        paramInternet = enterCommand();
+        while (paramFee != 0) {
+            System.out.println("Enter fee max (double)");
+            paramFee = enterCommandDouble();
+        }
+
+        while (!isParamValid(paramCalls)){
+            System.out.println("Enter free minutes min (string)");
+            paramCalls = enterCommandString();
+        }
+        while (!isParamValid(paramInternet)) {
+            System.out.println("Enter free MB min (string)");
+            paramInternet = enterCommandString();
+        }
     }
 
     private List<Plan> findPlansByParams() {
-        if (paramFee.equals("") && paramCalls.equals("") && paramInternet.equals("")) {
-            System.out.println("Error! No parameters.");
-            return null;
-        } else if (!isParamValid(paramFee) && !isParamValid(paramCalls) && !isParamValid(paramInternet)) {
-            System.out.println("Error! Invalid parameters.");
-            return null;
-        } else {
             List<Plan> result = new LinkedList<>();
+
             for (Plan plan : model.getAllPlans()) {
                 if(paramFee.equals(plan.getFee()) && paramCalls.equals(plan.getCalls().getFreeCallsOutLimit()) && paramInternet.equals(plan.getInternet().getFreeMBNetLimit()))
                     result.add(plan);
             }
 
             return result;
-        }
+
     }
 
     public boolean isParamValid(String param) {   //String param, String regExpByParam

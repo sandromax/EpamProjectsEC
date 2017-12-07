@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Plan {
-    protected double fee;
+    protected Double fee;
     protected List<Customer> customers;
     protected Calls calls;
     protected Internet internet;
@@ -16,18 +16,18 @@ public class Plan {
         internet = new Internet();
     }
 
-//    public Plan(double fee, Calls calls, Internet internet) {
-//        this.fee = fee;
-//        this.calls = calls;
-//        this.internet = internet;
-//    }
-//
-//    public Plan(double fee, Calls calls, Internet internet, List<Customer> customers) {
-//        this.fee = fee;
-//        this.calls = calls;
-//        this.internet = internet;
-//        this.customers = customers;
-//    }
+    public Plan(double fee, Calls calls, Internet internet) {
+        this.fee = fee;
+        this.calls = calls;
+        this.internet = internet;
+    }
+
+    public Plan(double fee, Calls calls, Internet internet, List<Customer> customers) {
+        this.fee = fee;
+        this.calls = calls;
+        this.internet = internet;
+        this.customers = customers;
+    }
 
     public double getFee() {
         return fee;
