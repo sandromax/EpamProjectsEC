@@ -16,18 +16,10 @@ public class NetFreePlus extends PrepaidPlan {
     }
 
     public NetFreePlus() {
-        fee = 155.0;
-        calls = new Calls("unlimited", "18000", 0.6);
-        internet = new Internet("unlimited");
-        freeNetResources = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 
     public NetFreePlus(List<Customer> customers) {
         this.customers = customers;
-        fee = 155.0;
-        calls = new Calls("unlimited", "18000", 0.6);
-        internet = new Internet("unlimited");
-        freeNetResources = new FreeNetResources[]{FACEBOOK, TWITTER, WIKIPEDIA, MY_BOOK, YOUTUBE, MEGOGO};
     }
 
 }

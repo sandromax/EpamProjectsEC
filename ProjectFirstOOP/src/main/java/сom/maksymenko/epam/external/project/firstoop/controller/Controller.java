@@ -8,6 +8,7 @@ import сom.maksymenko.epam.external.project.firstoop.view.View;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,9 +39,10 @@ public class Controller {
                     break;
                 }
                 case "find": {
+                    paramsToZero();
                     askParams();
                     System.out.println("Plans by params: ");
-                    View.showList(findPlansByParams());
+                    View.showSet(findPlansByParams());
                 }
             }
         }
@@ -59,7 +61,7 @@ public class Controller {
     }
 
     private void askParams() {
-        while (paramFee != 0) {
+        while (paramFee == 0) {
             System.out.println("Enter fee max (double)");
             paramFee = enterCommandDouble();
         }
@@ -74,16 +76,14 @@ public class Controller {
         }
     }
 
-    private List<Plan> findPlansByParams() {
-            List<Plan> result = new LinkedList<>();
+    private void paramsToZero() {
+        paramFee = 0.0;
+        paramCalls = "";
+        paramInternet = "";
+    }
 
-            for (Plan plan : model.getAllPlans()) {
-                if(paramFee.equals(plan.getFee()) && paramCalls.equals(plan.getCalls().getFreeCallsOutLimit()) && paramInternet.equals(plan.getInternet().getFreeMBNetLimit()))
-                    result.add(plan);
-            }
-
-            return result;
-
+    private Set<Plan> findPlansByParams() {
+            return model.findCommon(model.findPlansByMaxFee(paramFee), model.findPlansByCalls(paramCalls), model.findPlansByInternet(paramInternet));
     }
 
     public boolean isParamValid(String param) {   //String param, String regExpByParam

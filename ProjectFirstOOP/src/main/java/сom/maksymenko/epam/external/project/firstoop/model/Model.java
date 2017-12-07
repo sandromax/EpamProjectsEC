@@ -29,7 +29,7 @@ public class Model {
     public int getNumberAllClients() {
         int result = 0;
 
-        for(Plan plan : allPlans) {
+        for (Plan plan : allPlans) {
             result += plan.getNumberOfCustomers();
         }
 
@@ -48,19 +48,18 @@ public class Model {
         Set<Plan> result = new HashSet<>();
 
         for (Plan plan : allPlans) {
-            if((param.equals(plan.getFee())) || (param > plan.getFee()))
+            if ((param.equals(plan.getFee())) || (param > plan.getFee()))
                 result.add(plan);
         }
 
         return result;
     }
+
     public Set<Plan> findPlansByCalls(String param) {
         Set<Plan> result = new HashSet<>();
 
         for (Plan plan : allPlans) {
-            if(param.equals(plan.getCalls().getFreeCallsOutLimit()))
-                result.add(plan);
-            else if ((param.compareTo(plan.getCalls().getFreeCallsOutLimit())) > 0)
+            if((this.stringToDouble(param) <= this.stringToDouble(plan.getCalls().getFreeCallsOutLimit())))
                 result.add(plan);
         }
 
@@ -71,13 +70,38 @@ public class Model {
         Set<Plan> result = new HashSet<>();
 
         for (Plan plan : allPlans) {
-            if(param.equals(plan.getInternet().getFreeMBNetLimit()))
+            if((plan.getInternet().getFreeMBNetLimit().equals(param))
+                    || (this.stringToDouble(param) <= this.stringToDouble(plan.getCalls().getFreeCallsOutLimit()))) {
                 result.add(plan);
-            else if ((param.compareTo(plan.getInternet().getFreeMBNetLimit())) > 0)
-                result.add(plan);
+            }
         }
 
         return result;
+    }
+
+    public Set<Plan> findCommon(Set<Plan> first, Set<Plan> second, Set<Plan> third) {
+        Set<Plan> result = new HashSet<>();
+
+        for(Plan planFirst : first) {
+            for (Plan planSecond : second) {
+                for(Plan planThird : third) {
+                    if((planFirst.equals(planSecond)) && planSecond.equals(planThird))
+                        result.add(planFirst);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public Double stringToDouble(String string) {
+        try {
+            Double result = Double.parseDouble(string);
+            return result;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

@@ -12,10 +12,23 @@ import java.util.*;
 public class TestField {
     public static void main(String[] args) {
 
-        SpeakFree speakFree = new SpeakFree(CustomerRandomMaker.getMore(15));
-        System.out.println(speakFree.getFee());
-        System.out.println(speakFree.getCalls().getFreeCallsOutLimit());
-        System.out.println(speakFree.getInternet().getFreeMBNetLimit());
+//        Model model = new Model(1,2,3,4,5);
+//
+//        System.out.println("all plans:");
+//        View.showSet(model.getAllPlans());
+//
+//        System.out.println("by fee(150):");
+//        View.showSet(model.findPlansByMaxFee(150.0));
+//
+//        System.out.println("By calls(300):");
+//        View.showSet(model.findPlansByCalls("300"));
+//
+//        System.out.println("By internet(500):");
+//        View.showSet(model.findPlansByInternet("500"));
+//
+//
+//        System.out.println("common fee calls:");
+//        View.showSet(model.findCommon(model.findPlansByMaxFee(150.0), model.findPlansByCalls("300"), model.findPlansByInternet("500")));
 
     }
 

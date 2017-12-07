@@ -16,9 +16,6 @@ public class SpeakFree extends PrepaidPlan {
     }
 
     public SpeakFree() {
-        fee = 45.0;
-        calls = new Calls("unlimited", "300", 0.6);
-        internet = new Internet("500", 0.01);
     }
 
     public SpeakFree(List<Customer> customers) {

@@ -23,7 +23,7 @@ public class View {
     public static void showCommands() {
         System.out.println("    Commands:\nclients - to get all clients\n" +
                 "sort - to sort plans by fee\nfind - to find plan by" +
-                "parameters");
+                "parameters\nexit - to exit");
     }
 
     /**
