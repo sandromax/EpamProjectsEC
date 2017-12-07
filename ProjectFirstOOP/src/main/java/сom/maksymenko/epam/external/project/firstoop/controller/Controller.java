@@ -1,12 +1,9 @@
 package сom.maksymenko.epam.external.project.firstoop.controller;
 
-
 import сom.maksymenko.epam.external.project.firstoop.model.Model;
 import сom.maksymenko.epam.external.project.firstoop.model.entities.Plan;
 import сom.maksymenko.epam.external.project.firstoop.view.View;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -23,7 +20,7 @@ public class Controller {
     public void launch() {
         model = new Model(10, 20, 30, 5, 1);
 
-        System.out.println("10, 20, 30, 5, 1");
+        System.out.println("initial params by model: 10, 20, 30, 5, 1");
 
         String command = "";
         while (!command.equals("exit")) {
@@ -43,6 +40,7 @@ public class Controller {
                     askParams();
                     System.out.println("Plans by params: ");
                     View.showSet(findPlansByParams());
+                    break;
                 }
             }
         }
@@ -91,10 +89,8 @@ public class Controller {
         Matcher matcher = pattern.matcher(param);
 
         if (matcher.find()) {
-//            System.out.println("Param of fee is ok");
             return true;
         } else {
-//            System.out.println("Param " + param + "is not valid");
             return false;
         }
     }

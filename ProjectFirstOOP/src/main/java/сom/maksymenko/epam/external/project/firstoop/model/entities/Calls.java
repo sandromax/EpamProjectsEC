@@ -17,14 +17,8 @@ public class Calls {
 
         pricePerSecond = 0.0;
     }
+
     public Calls() {
-//        freeCallsInLimit = "";
-//        freeCallsOutLimit = "";
-//
-//        freeCallsInBalance = 0.0;
-//        freeCallsOutBalance = 0.0;
-//
-//        pricePerSecond = 0.0;
     }
 
     public Calls(String freeCallsInLimit, String freeCallsOutLimit, double pricePerSecond) {
