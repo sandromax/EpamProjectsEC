@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
 public class TestField {
     public static void main(String[] args) {
 
-        int wordLenght = 4;
-        String number = "" + (wordLenght - 1);
+        int wordLength = 7;
+        String number = "" + (wordLength - 1);
 
         String textKotlin = "Makar, I want to tell you about a new programming language called Kotlin and why you should consider it for your next project.";
         String regConsolant = "[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz]";
 
         String regExpBegin = "(\\s|\\W)([BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz][\\w]{";
-        String regExpEnd = "})[\\s.,!?*\"\']";
+        String regExpEnd = "})([\\s.,!?*\"\'])";
 
         String regExp = regExpBegin.concat(number).concat(regExpEnd);
 
@@ -41,6 +41,8 @@ public class TestField {
 
             iteratorEnd = matcher.end();
         }
+
+        testResult.add(textKotlin.substring(iteratorEnd, textKotlin.length()));
 
         System.out.println("founded " + allMatches.size() + " matches: ");
         System.out.println(allMatches);
