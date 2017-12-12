@@ -8,14 +8,17 @@ import java.util.regex.Pattern;
 public class TestField {
     public static void main(String[] args) {
 
-        int wordLength = 7;
-        String number = "" + (wordLength - 1);
+//        String regConsolant = "[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz]";
 
         String textKotlin = "Makar, I want to tell you about a new programming language called Kotlin and why you should consider it for your next project.";
-        String regConsolant = "[BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz]";
 
-        String regExpBegin = "(\\s|\\W)([BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz][\\w]{";
-        String regExpEnd = "})([\\s.,!?*\"\'])";
+        int wordLength = 4;
+        String number = "" + (wordLength - 1);
+
+        //  (\s|\W) ([\s.,!?*"'])
+
+        String regExpBegin = "\\b([BbCcDdFfGgHhJjKkLlMmNnPpQqRrSsTtVvWwXxYyZz][\\w]{";
+        String regExpEnd = "})\\b";
 
         String regExp = regExpBegin.concat(number).concat(regExpEnd);
 
@@ -35,7 +38,7 @@ public class TestField {
             System.out.println("start index" + matcher.start());
             System.out.println("end index" + matcher.end());
 
-            iteratorStart = matcher.start();
+//            iteratorStart = matcher.start();
 
             testResult.add(textKotlin.substring(iteratorEnd, matcher.start()));
 
