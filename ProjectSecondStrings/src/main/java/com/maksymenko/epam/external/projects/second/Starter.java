@@ -14,7 +14,9 @@ public class Starter {
 
         list = fw.read("src/main/resources/30.txt");
 
-        System.out.println(list);
-        System.out.println("Strings in list " + list.size());
+//        System.out.println(list);
+//        System.out.println("Strings in list " + list.size());
+
+        System.out.println(fw.readLikeOneString("src/main/resources/30.txt"));
     }
 }
