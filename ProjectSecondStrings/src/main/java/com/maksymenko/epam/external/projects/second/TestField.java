@@ -35,8 +35,8 @@ public class TestField {
 
         while(matcher.find()) {
             allMatches.add(matcher.group());
-            System.out.println("start index" + matcher.start());
-            System.out.println("end index" + matcher.end());
+//            System.out.println("start index" + matcher.start());
+//            System.out.println("end index" + matcher.end());
 
 //            iteratorStart = matcher.start();
 

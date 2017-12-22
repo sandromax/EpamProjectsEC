@@ -38,4 +38,19 @@ public class FileWorker {
 
         return null;
     }
+
+    public String readLikeOneString(String path) {
+        List<String> list = new LinkedList<>();
+
+        list = read(path);
+
+        StringBuilder builder = new StringBuilder();
+
+        for(String string : list) {
+            builder.append(string);
+        }
+
+        return builder.toString();
+
+    }
 }
