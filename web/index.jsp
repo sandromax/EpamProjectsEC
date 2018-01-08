@@ -9,14 +9,14 @@
 <html>
 <head>
     <title>fastest</title>
+    <link rel="stylesheet" href="jsp/css/reset.css">
+    <link rel="stylesheet" href="jsp/css/common.css">
 </head>
 <body>
-<div>
-    <h2>Bonjour!</h2>
-    <h4>This is fastest</h4>
-    <a href="jsp/admin_reg.jsp">to registration admin</a>
-    <a href="jsp/admin_login.jsp">to admin enter</a>
-    <a href="jsp/student_login.jsp">to student enter</a>
-</div>
+Good morning!
+This is fastest.
+<a href="jsp/admin_reg.jsp">Admin Registration</a>
+<a href="jsp/admin_login.jsp">Admin Log In</a>
+<a href="jsp/student_login.jsp">Student Log In</a>
 </body>
 </html>
