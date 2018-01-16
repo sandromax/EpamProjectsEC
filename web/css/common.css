@@ -24,7 +24,7 @@ a {
 #right_image {
     position: relative;
     width: 38%;
-    background-image: url(../img/student_login.jpg);
+    background-image: url(../jsp/img/student_login.jpg);
     background-position: center;
     -webkit-background-size: 110% 110%;
     background-size: 110%;

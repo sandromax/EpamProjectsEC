@@ -19,7 +19,7 @@
             <a href="#"><img src="img/logo.svg" alt=""></a>
         </div>
             <div id="reg_form">
-                <form action="">
+                <form action="../controller">
                     <div class="form_header">
                         <p>РЕГИСТРАЦИЯ</p>
                         <p>для администраторов</p>
@@ -40,6 +40,10 @@
                         <input type="submit" value="зарегистрироваться">
                         <p>Если у вас уже есть аккаунт. <a href="admin_login.jsp"><span class="orange_letters">Войдите</span></a></p>
                     </div>
+                </form>
+                <form action="../controller">
+                    <input type="text" name="where">
+                    <input type="submit" name="where_btn" value="to index">
                 </form>
             </div>
         <div>

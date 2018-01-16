@@ -1,5 +1,5 @@
 package org.sandromax.fastest.domain;
 
-public class Test {
+public class TestHistory {
 
 }
