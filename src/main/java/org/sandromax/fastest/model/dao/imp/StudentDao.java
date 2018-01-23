@@ -25,21 +25,21 @@ public class StudentDao {
      * @return true if adding was successful
      */
     boolean addStudent(String name, String email, String pass) {
-        PreparedStatement preparedStatement = null;
-
-        try (Connection connection = ConnectionPool.getConnection()) {
-            connection.prepareStatement(SQL_INSERT_STUDENT);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
-            preparedStatement.setString(1, pass);
-
-            preparedStatement.executeQuery();
-
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        PreparedStatement preparedStatement = null;
+//
+//        try (Connection connection = ConnectionPool.getConnection()) {
+//            connection.prepareStatement(SQL_INSERT_STUDENT);
+//            preparedStatement.setString(1, name);
+//            preparedStatement.setString(2, email);
+//            preparedStatement.setString(1, pass);
+//
+//            preparedStatement.executeQuery();
+//
+//            return true;
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         return false;
     }
@@ -123,22 +123,23 @@ public class StudentDao {
 
     public List<Student> findAllStudents() {
         List<Student> result= new LinkedList<>();
-        Student student;
-
-        try(Connection connection = ConnectionPool.getConnection()) {
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(SQL_SELECT_ALL_STUDENTS);
-
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                String email = rs.getString(3);
-                student = new Student(id, name, email);
-                result.add(student);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        Student student;
+//
+//        try(Connection connection = ConnectionPool.getConnection()) {
+//            Statement st = connection.createStatement();
+//            ResultSet rs = st.executeQuery(SQL_SELECT_ALL_STUDENTS);
+//
+//            while (rs.next()) {
+//                int id = rs.getInt(1);
+//                String name = rs.getString(2);
+//                String email = rs.getString(3);
+//                String surname = "Churchill";
+//                student = new Student(id, name, surname, email);
+//                result.add(student);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         return result;
     }
