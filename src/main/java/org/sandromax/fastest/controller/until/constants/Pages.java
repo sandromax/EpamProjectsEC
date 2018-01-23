@@ -12,5 +12,5 @@ package org.sandromax.fastest.controller.until.constants;
  "jsp/user.jsp";
  }
  */
-public enum Constants {
+public enum Pages {
 }
