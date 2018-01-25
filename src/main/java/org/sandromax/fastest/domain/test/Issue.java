@@ -32,7 +32,55 @@ public class Issue {
             this.answers = answers;
         }
 
-        @Override
+    public Locale getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Locale language) {
+        this.language = language;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
+    public LinkedList<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(LinkedList<String> answers) {
+        this.answers = answers;
+    }
+
+    @Override
         public String toString() {
             return "\nsubject: "+subject+"\ntheme: "+theme+"\nquestion: "+question+"\nright: "+rightAnswer+"\nanswers: "+answers.toString()+"\n";
         }
