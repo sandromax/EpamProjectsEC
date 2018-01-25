@@ -1,8 +1,13 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.result;
+
+import org.sandromax.fastest.domain.user.Student;
 
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Contains all test results by student
+ */
 public class Success {
     private Student student;
     private List<TestDone> rates;
@@ -32,5 +37,9 @@ public class Success {
 
     public void setRates(List<TestDone> rates) {
         this.rates = rates;
+    }
+
+    public void addRate(TestDone testDone) {
+        rates.add(testDone);
     }
 }

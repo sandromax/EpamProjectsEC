@@ -1,15 +1,21 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.result;
+
+import org.sandromax.fastest.domain.user.Student;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 /**
  * contains result of the passed test by theme
+ * corresponds to fastest.successes in DB
  */
 public class TestDone {
+    private Student student;
     private String theme;
     private Double rate;
     private LocalDate date;
+    private TestHistory testHistory;
+
 
     public TestDone() {
         theme = "";
@@ -17,10 +23,20 @@ public class TestDone {
         date = LocalDate.now();
     }
 
-    public TestDone(String theme, Double rate, LocalDate date) {
+    public TestDone(Student student, String theme, Double rate, LocalDate date, TestHistory testHistory) {
+        this.student = student;
         this.theme = theme;
         this.date = date;
         this.rate = rate;
+        this.testHistory = testHistory;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public String getTheme() {
@@ -43,6 +59,10 @@ public class TestDone {
         this.date = dateSql.toLocalDate();
     }
 
+    public Date getSqlDate() {
+        return Date.valueOf(date);
+    }
+
     public Double getRate() {
         return rate;
     }
@@ -51,8 +71,11 @@ public class TestDone {
         this.rate = rate;
     }
 
-    public Date getSqlDate() {
-        Date dateSql = Date.valueOf(date);
-        return dateSql;
+    public TestHistory getTestHistory() {
+        return testHistory;
+    }
+
+    public void setTestHistory(TestHistory testHistory) {
+        this.testHistory = testHistory;
     }
 }

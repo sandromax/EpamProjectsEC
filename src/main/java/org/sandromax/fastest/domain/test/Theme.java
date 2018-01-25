@@ -1,4 +1,4 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.test;
 
 public class Theme {
     private int id;

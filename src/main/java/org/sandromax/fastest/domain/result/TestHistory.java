@@ -1,18 +1,20 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.result;
+
+import org.sandromax.fastest.domain.user.Student;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Describes the expanded information about passing the test by theme
+ * Describes the expanded information about passing the single test by theme
  */
 public class TestHistory {
-    Student student;
-    String theme;
-    LocalDate dateLocal;
-    Date dateSql;
-    List<IssueDone> questions;
+    private Student student;
+    private String theme;
+    private LocalDate dateLocal;
+    private Date dateSql;
+    private List<IssueDone> issueDones;
 
     /**
      * @return converted from LocalDate(java.time) to Date(java.sql) field

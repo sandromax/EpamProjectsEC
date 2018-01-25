@@ -1,4 +1,4 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.user;
 
 public class Student {
     private int id;

@@ -1,20 +1,21 @@
-package org.sandromax.fastest.domain;
+package org.sandromax.fastest.domain.test;
 
 import java.util.LinkedList;
+import java.util.Locale;
 
 /**
  * @author Oleksandr Maksymenko 2017.01.09
  */
 public class Issue {
-        //    private Locale language;
+        private Locale language;
         private String subject;
-        public String theme;
+        private String theme;
         private String question;
-        public String rightAnswer;
+        private String rightAnswer;
         private LinkedList<String> answers;
 
         public Issue() {
-//        language = new Locale("uk");
+            language = new Locale("uk");
             subject = "";
             theme = "";
             question = "";
@@ -22,8 +23,8 @@ public class Issue {
             answers = new LinkedList<>();
         }
 
-        public Issue(String subject, String theme, String question, String rightAnswer, LinkedList<String> answers) {
-//        this.language = language;
+        public Issue(String language, String subject, String theme, String question, String rightAnswer, LinkedList<String> answers) {
+            this.language = new Locale(language);
             this.subject = subject;
             this.theme = theme;
             this.question = question;
