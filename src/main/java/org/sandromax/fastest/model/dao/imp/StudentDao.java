@@ -1,10 +1,8 @@
 package org.sandromax.fastest.model.dao.imp;
 
-import org.sandromax.fastest.domain.Student;
-import org.sandromax.fastest.domain.TestHistory;
-import org.sandromax.fastest.model.dao.connection.impl.ConnectionPool;
+import org.sandromax.fastest.domain.user.Student;
+import org.sandromax.fastest.domain.result.TestHistory;
 
-import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 

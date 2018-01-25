@@ -1,7 +1,6 @@
 package org.sandromax.fastest.model.dao;
 
-import org.sandromax.fastest.domain.Admin;
-import org.sandromax.fastest.domain.Issue;
+import org.sandromax.fastest.domain.user.Admin;
 
 import java.util.List;
 
