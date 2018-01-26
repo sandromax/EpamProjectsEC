@@ -1,0 +1,108 @@
+body {
+	background-color: #FDFDFD;
+}
+
+.logo {
+  position: absolute;
+  background-image: url(../img/Logo.svg);
+  display: block;
+  width: 111px;
+  height: 24px;
+  left: 48px;
+  top: 48px;
+
+}
+
+.title_1 {
+font-size: 28px;
+font-weight: 700;
+padding-bottom: 24px;
+}
+
+
+form {
+	text-transform: uppercase;
+	width: 480px;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+input {
+	font-size: 14px;
+	color: #AAADB3;
+	margin: 0;
+}
+
+
+.signup_info label {
+	color: #232323;
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	margin-bottom: 24px;
+
+}
+
+.signup_info input {
+	background: #fff;
+	color: #232323;
+	border: 1px solid #232323;
+	padding: 12px;
+  	margin-top: 8px;
+  	width: 100%;
+}
+
+input:focus {
+	border: 1px solid #FF5A00;
+	outline: none;
+}
+
+.signup_action {
+	margin-top: 8px;
+}
+
+
+.flex-conteiner {
+	height: 100vh;
+	display: flex;
+}
+
+.sign_up_form {
+	width: 65%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.signup_picture {
+	background: url(../img/sign_up.jpg) center no-repeat;
+	background-size: cover;
+	width: 35%;
+}
+
+
+.signup_footer {
+	position: absolute;
+	left: 48px;
+	bottom: 48px;
+}
+
+
+.sign_title {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+
+.link {
+	color: #FF5A00;
+	text-decoration: none;
+}
+.link:hover {
+	color: #FF8B4C;
+	transition: .4s;
+}
