@@ -1,7 +1,9 @@
 package org.sandromax.fastest.controller;
 
-import org.sandromax.fastest.domain.Student;
-import org.sandromax.fastest.model.dao.imp.StudentDao;
+import org.sandromax.fastest.domain.test.Subject;
+import org.sandromax.fastest.domain.user.Student;
+import org.sandromax.fastest.model.dao.imp.TestDao;
+import org.sandromax.fastest.model.dao.imp.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,18 +39,31 @@ public class MainController extends HttpServlet {
 //        if(!req.getParameter("where_btn").isEmpty())
 //            req.getRequestDispatcher(Pages.INDEX.toString()).forward(req, resp);
 
-        StudentDao sd = new StudentDao();
-        List<Student> students = sd.findAllStudents();
+//        UserDao sd = new UserDao();
+//        List<Student> students = sd.getAllStudents();
+//
+//        System.out.println("LIST: ");
+//        for(Student student : students) {
+//            System.out.println("(id)" + student.getId() + " (name)" + student.getName() + " (email)" +student.getEmail());
+//        }
 
-        System.out.println("LIST: ");
-        for(Student student : students) {
-            System.out.println(student.getId()+"-id. "+student.getName()+"-name. "+student.getEmail()+"-email.");
+//        req.setAttribute("studentFirst", students.get(1).getName());
+//        req.setAttribute("studentSecond", students.get(2).getName());
+//        req.setAttribute("header_text", "Предмети");
+
+        TestDao testDao = new TestDao();
+        List<Subject> subjects = testDao.getAllSubjects();
+
+        for(Subject s : subjects) {
+            System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
         }
 
-        req.setAttribute("studentFirst", students.get(1).getName());
-        req.setAttribute("studentSecond", students.get(2).getName());
+        req.setAttribute("list", subjects);
 
-        req.getRequestDispatcher("jsp/test_field_page.jsp").forward(req, resp);
+
+//        req.getRequestDispatcher("jsp/Finish_test_field.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/catalog_subjects.jsp").forward(req, resp);
+//        req.getRequestDispatcher("jsp/header.jsp").forward(req, resp);
 
     }
 }

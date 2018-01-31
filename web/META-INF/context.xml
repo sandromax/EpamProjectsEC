@@ -10,6 +10,6 @@
         username="mysql.app"
         password="56MAdb_!@#good"
         driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/fastest_console"
+        url="jdbc:mysql://localhost:3306/fastest"
     />
 </Context>
