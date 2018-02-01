@@ -1,5 +1,6 @@
 package org.sandromax.fastest.controller;
 
+import org.sandromax.fastest.controller.command.*;
 import org.sandromax.fastest.domain.test.Subject;
 import org.sandromax.fastest.domain.user.Student;
 import org.sandromax.fastest.model.dao.imp.TestDao;
@@ -41,7 +42,7 @@ public class MainController extends HttpServlet {
 
 //        UserDao sd = new UserDao();
 //        List<Student> students = sd.getAllStudents();
-//
+//---------------Testing DAO
 //        System.out.println("LIST: ");
 //        for(Student student : students) {
 //            System.out.println("(id)" + student.getId() + " (name)" + student.getName() + " (email)" +student.getEmail());
@@ -50,20 +51,33 @@ public class MainController extends HttpServlet {
 //        req.setAttribute("studentFirst", students.get(1).getName());
 //        req.setAttribute("studentSecond", students.get(2).getName());
 //        req.setAttribute("header_text", "Предмети");
-
-        TestDao testDao = new TestDao();
-        List<Subject> subjects = testDao.getAllSubjects();
-
-        for(Subject s : subjects) {
-            System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
-        }
-
-        req.setAttribute("list", subjects);
-
-
+//---------------Testing DAO and JSTL-----------works
+//        TestDao testDao = new TestDao();
+//        List<Subject> subjects = testDao.getAllSubjects();
+//
+//        for(Subject s : subjects) {
+//            System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
+//        }
+//
+//        req.setAttribute("list", subjects);
+        //-------End Testing DAO and JSTL
+//---------------End Tesing DA
+//--------FORWARDING PAGES
 //        req.getRequestDispatcher("jsp/Finish_test_field.jsp").forward(req, resp);
-        req.getRequestDispatcher("jsp/catalog_subjects.jsp").forward(req, resp);
+//        req.getRequestDispatcher("jsp/catalog_subjects.jsp").forward(req, resp);
 //        req.getRequestDispatcher("jsp/header.jsp").forward(req, resp);
+
+        //-------Testing Pattern Command
+
+        Receiver receiver = new Receiver();
+        Client client = new Client(receiver);
+        Command commandSubjectsCatalog = client.initCommand(CommandList.SUBJECTS_CATALOG);
+        Invoker invokerSubj = new Invoker(commandSubjectsCatalog);
+        invokerSubj.invokeCommand();
+
+        Command commandMainPage = client.initCommand(CommandList.MAIN);
+        Invoker invokerMainPage = new Invoker(commandMainPage);
+        invokerMainPage.invokeCommand();
 
     }
 }

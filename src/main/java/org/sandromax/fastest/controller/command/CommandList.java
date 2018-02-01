@@ -6,4 +6,5 @@ package org.sandromax.fastest.controller.command;
  экземпляров «Команда»
  */
 public enum CommandList {
+    SUBJECTS_CATALOG, MAIN
 }
