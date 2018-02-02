@@ -1,18 +1,14 @@
 package org.sandromax.fastest.controller;
 
 import org.sandromax.fastest.controller.command.*;
-import org.sandromax.fastest.domain.test.Subject;
-import org.sandromax.fastest.domain.user.Student;
-import org.sandromax.fastest.model.dao.imp.TestDao;
-import org.sandromax.fastest.model.dao.imp.UserDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "controller", urlPatterns = {"/controller"})
 public class MainController extends HttpServlet {
@@ -64,20 +60,34 @@ public class MainController extends HttpServlet {
 //---------------End Tesing DA
 //--------FORWARDING PAGES
 //        req.getRequestDispatcher("jsp/Finish_test_field.jsp").forward(req, resp);
-//        req.getRequestDispatcher("jsp/catalog_subjects.jsp").forward(req, resp);
+//        req.getRequestDispatcher("jsp/subjects_catalog.jsp").forward(req, resp);
 //        req.getRequestDispatcher("jsp/header.jsp").forward(req, resp);
 
         //-------Testing Pattern Command
 
-        Receiver receiver = new Receiver();
-        Client client = new Client(receiver);
-        Command commandSubjectsCatalog = client.initCommand(CommandList.SUBJECTS_CATALOG);
-        Invoker invokerSubj = new Invoker(commandSubjectsCatalog);
-        invokerSubj.invokeCommand();
+//        Receiver receiver = new Receiver();
+//        ActionFactory actionFactory = new ActionFactory(receiver);
+//
+//        Command commandSubjectsCatalog = actionFactory.defineCommand(CommandList.SUBJECTS_CATALOG);
+//        Invoker invokerSubj = new Invoker(commandSubjectsCatalog);
+//        invokerSubj.invokeCommand();
+//
+//        Command commandMainPage = actionFactory.defineCommand(CommandList.MAIN_PAGE);
+//        Invoker invokerMainPage = new Invoker(commandMainPage);
+//        invokerMainPage.invokeCommand();
 
-        Command commandMainPage = client.initCommand(CommandList.MAIN);
-        Invoker invokerMainPage = new Invoker(commandMainPage);
-        invokerMainPage.invokeCommand();
+        String page = null;
+        ActionFactory action = new ActionFactory();
+        Command command = action.defineCommand(req);
+        page = command.execute(req);
+
+        if(page != null) {
+//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+//            dispatcher.forward(req, resp);
+            System.out.println("PAGE: " + page);
+            req.getRequestDispatcher(page).forward(req, resp);
+
+        }
 
     }
 }

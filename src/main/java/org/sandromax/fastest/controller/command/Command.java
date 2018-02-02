@@ -1,5 +1,7 @@
 package org.sandromax.fastest.controller.command;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface Command {
-    void execute();
+    String execute(HttpServletRequest request);
 }
