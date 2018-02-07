@@ -3,9 +3,9 @@
 <head>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:500,600" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/sign_in.css">
-	<link rel="stylesheet" type="text/css" href="../css/reset.css">
 	<meta charset="UTF-8">
 	<title>Вход</title>
 </head>
