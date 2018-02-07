@@ -1,7 +1,6 @@
 package org.sandromax.fastest.controller.command;
 
-import org.sandromax.fastest.controller.command.impl.CommandMainPage;
-import org.sandromax.fastest.controller.command.impl.CommandSubjectsCatalog;
+import org.sandromax.fastest.controller.command.impl.*;
 
 /**
  * Перечисление констант с
@@ -9,8 +8,15 @@ import org.sandromax.fastest.controller.command.impl.CommandSubjectsCatalog;
  экземпляров «Команда»
  */
 public enum CommandList {
+    SIGN_IN(new CommandSignIn()),
+    SIGN_UP(new CommandSignUp()),
+    MAIN_PAGE(new CommandMainPage()),
     SUBJECTS_CATALOG(new CommandSubjectsCatalog()),
-    MAIN_PAGE(new CommandMainPage());
+    THEMES_CATALOG(new CommandThemesCatalog()),
+    TEST_PAGE(new CommandTestPage()),
+    TEST_RESULT_PAGE(new CommandTestResultPage()),
+    ADMIN_PAGE(new CommandAdminPage());
+
     private CommandList(Command command) {
         this.command = command;
     }
