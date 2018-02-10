@@ -13,7 +13,8 @@ import java.util.Locale;
 public class TestDao {
 
     public static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
-    public static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
+    public static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
+    public static final String SQL_SELECT_THEMES_BY_SQL = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = 'SQL'";
 
 
     /**
@@ -49,30 +50,36 @@ public class TestDao {
         return new LinkedList<>();
     }
 
-    List<Theme> getThemesBySubject(String subjectName) {
-        PreparedStatement preparedStatement = null;
-        int id = 0;
+    public List<Theme> getThemesBySubject(String subjectName) {
+//        PreparedStatement preparedStatement = null;
+        int themesId, subjectId = 0;
         String name, lang = "";
-//        Subject subject
+        List<Theme> themes = new LinkedList<>();
 
         try(Connection connection = ConnectionPool.getConnection()) {
-            connection.prepareStatement(SQL_SELECT_THEMES_BY_SUBJECT_NAME);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_THEMES_BY_SUBJECT_NAME);
             preparedStatement.setString(1, subjectName);
-
+//
             ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                id = rs.getInt(1);
-                name = rs.getString(2);
-//                subjectName = rs.getString(3);
-                lang = rs.getString(4);
+//            Statement statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery(SQL_SELECT_THEMES_BY_SQL);
 
-//                Theme theme = new Theme(id, name, new Subject(su))
+            while (rs.next()) {
+                themesId = rs.getInt(1);
+                name = rs.getString(2);
+                subjectId = rs.getInt(3);
+                subjectName = rs.getString(4);
+                lang = rs.getString(5);
+
+                Theme theme = new Theme(themesId, name, new Subject(subjectId, subjectName, new Locale(lang)), new Locale(lang));
+
+                themes.add(theme);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new LinkedList<>();
+        return themes;
     }
 
     List<Issue> getIssuesByThemeAndLang(int themeId, String lang) {

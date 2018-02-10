@@ -53,4 +53,9 @@ public class Theme {
     public void setLang(Locale lang) {
         this.lang = lang;
     }
+
+    @Override
+    public String toString() {
+        return "Id: " + id + " name: " + name + " subject name: " + subject.getName() + " lang: " + lang.getLanguage();
+    }
 }

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Enumeration;
 
 @WebServlet(name = "controller", urlPatterns = {"/controller"})
 public class MainController extends HttpServlet {
@@ -84,7 +86,12 @@ public class MainController extends HttpServlet {
         if(page != null) {
 //            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
 //            dispatcher.forward(req, resp);
-            System.out.println("PAGE: " + page);
+
+//            Enumeration<String> collection = req.getAttributeNames();
+//            while(collection.hasMoreElements()) {
+//                System.out.println("elem:" + collection.nextElement());
+//            }
+
             req.getRequestDispatcher(page).forward(req, resp);
 
         }

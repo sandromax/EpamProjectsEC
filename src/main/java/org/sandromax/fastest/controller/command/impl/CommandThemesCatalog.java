@@ -14,9 +14,21 @@ public class CommandThemesCatalog implements Command {
         String page = Pages.THEMES_CATALOG;
 
         String subject = request.getParameter("subject");
+        System.out.println("param subject: " + request.getParameter("subject"));
+        System.out.println("param command: " + request.getParameter("command"));
+
+        System.out.println("attr subject: " + request.getAttribute("subject"));
+        System.out.println("attr command: " + request.getAttribute("command"));
+
+
 
         TestDao testDao = new TestDao();
         List<Theme> themes = testDao.getThemesBySubject(subject);
+
+        System.out.println("CommandThemesCatalog output");
+        for(Theme theme : themes) {
+            System.out.println(theme.toString());
+        }
 
         request.setAttribute("list", themes);
 

@@ -11,8 +11,8 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/catalog.css">
     <title>Subjects</title>
 </head>
@@ -22,84 +22,15 @@
         <div class="catalog_section">
             <h2 class="title_catalog"><%--<span class="numbers">01.</span> Мировая история</h2>--%>
             <div class="flex-catalog">
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Java</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
 
                 <c:forEach items="${list}" var="item">
-                    <div class="card_catalog">
-                        <div class="card_text">
+                        <div class="card_catalog">
                             <p class="card_title"><c:out value="${item.getName()}" /></p>
-                            <p>(<c:out value="${item.getLang()}" />)</p>
+                            <div class="triangle"></div>
+                            <a href ="/controller?command=themes_catalog&subject=${item.getName()}" class="btn_card">Перейти</a>
                         </div>
-                    </div>
                 </c:forEach>
-
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">SQL</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Історія</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Географія</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Крестьянская война в германии</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
             </div>
         </div>
-
-
-        <%--<div class="catalog_section">--%>
-            <%--<h2 class="title_catalog"><span class="numbers">02.</span> География</h2>--%>
-            <%--<div class="flex-catalog">--%>
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Африка</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Тасмания</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Гималаи</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Западная европа</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-                <%--<div class="card_catalog">--%>
-                    <%--<div class="card_text">--%>
-                        <%--<p class="card_title">Карибский архипелаг</p>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-
-    <%--</main>--%>
 </body>
 </html>

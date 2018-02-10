@@ -1,8 +1,5 @@
 package org.sandromax.fastest.controller.command;
 
-import org.sandromax.fastest.controller.command.impl.CommandMainPage;
-import org.sandromax.fastest.controller.command.impl.CommandSubjectsCatalog;
-
 import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {
@@ -24,7 +21,7 @@ public class ActionFactory {
 //        switch (cmd){
 //            case MAIN_PAGE:
 //                System.out.println("Creating command 'MainPage' and set up its receiver");
-//                command = new CommandMainPage(this.receiver);
+//                command = new CommandIndexPage(this.receiver);
 //                break;
 //            case SUBJECTS_CATALOG:
 //                System.out.println("Creating command 'SubjectsCatalog' and set up its receiver");

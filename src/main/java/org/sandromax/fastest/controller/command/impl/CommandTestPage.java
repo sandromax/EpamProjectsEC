@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommandTestPage implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = "/Users/sandro/site/jsp/catalog.jsp";
+        String page = "web23/index.jsp";
         return page;
     }
 }

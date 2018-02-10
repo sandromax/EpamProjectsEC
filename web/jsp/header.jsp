@@ -22,7 +22,7 @@
 <header>
     <div class="head">
         <div class="flex-head">
-            <a href="../index.jsp" class="logo"></a>
+            <a href="/controller?command=main_page" class="logo"></a>
             <p class="head_title">Subjects</p>
             <div class="dropdown">
                 <button class="dropbtn">Александр Сокур</button>

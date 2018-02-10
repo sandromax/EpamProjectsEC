@@ -22,21 +22,10 @@
 				<a href="jsp/sign_up.jsp" class="btn_fill">Зарегистрироваться</a>
 				<a href="jsp/sign_in.jsp" class="btn_border">Войти</a>
 				<div>
-					<a href="trash/catalog.jsp">CATALOG</a>
-					<h2>Good morning! This is fastest.</h2>
-					<p><a href="trash/admin_reg.jsp">Admin Registration</a></p><br/>
-					<p><a href="jsp/subjects_catalog.jsp">SUBJECTS</a></p>
-					<p><a href="second.jsp">Second Page</a></p>
-
 					<form action="controller">
 						<input type="text" name="command" value="subjects_catalog">
 						<input type="submit" value="RUN">
 					</form>
-<%----%>
-					<a href="jsp/header.jsp">Header</a>
-                    <button value="subjects_catalog" action="controller">btnSubjects</button>
-                    <input type="button" name="<command>" value="subjects_command" onclick="controller">
-
                     <form action="controller">
                         <input type="text" name="command" value="main_page">
                         <input type="submit" value="Go">
@@ -46,18 +35,19 @@
 					</form>
 
 					<a href="/controller?command=subjects_catalog">Subjects</a>
+					<hr/>
+					<a href="/controller?command=themes_catalog">Themes</a>
+					<hr>
+					<form action="controller">
+						<input type="text" name="command" value="themes_catalog">
+						<input type="text" name="subject" value="SQL">
+						<input type="submit" value="THEMES by SQL">
+					</form>
+					<hr>
+					<a href="/controller?command=test_page">Test</a>
 				</div>
 			</div>
 		</div>
-
-		<div>
-
-			<jsp:useBean id="firstObject" class="org.sandromax.fastest.beans.FirstBean"/>
-			<jsp:setProperty name="firstObject" property="textVar" value="Bonjour"></jsp:setProperty>
-			<p>${firstObject.getTextVar()}</p>
-			<jsp:getProperty name="firstObject" property="textVar"></jsp:getProperty>
-		</div>
-		
 	</main>
 </body>
 </html>
