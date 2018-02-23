@@ -8,6 +8,7 @@ import org.sandromax.fastest.controller.command.impl.*;
  экземпляров «Команда»
  */
 public enum CommandList {
+    SIGN_IN_PAGE(new CommandSignInPage()),
     SIGN_IN(new CommandSignIn()),
     SIGN_UP(new CommandSignUp()),
     MAIN_PAGE(new CommandIndexPage()),

@@ -14,7 +14,7 @@ public class CommandThemesCatalog implements Command {
         String page = Pages.THEMES_CATALOG;
 
         String subject = request.getParameter("subject");
-        System.out.println("param subject: " + request.getParameter("subject"));
+        System.out.println("param subject: " + subject);
         System.out.println("param command: " + request.getParameter("command"));
 
         System.out.println("attr subject: " + request.getAttribute("subject"));

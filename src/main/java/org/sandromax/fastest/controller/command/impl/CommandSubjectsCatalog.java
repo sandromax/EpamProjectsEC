@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class CommandSubjectsCatalog implements Command {
-//    private Receiver receiver;
-//    public CommandSubjectsCatalog(Receiver receiver) {
-//        this.receiver = receiver;
-//    }
+
     @Override
     public String execute(HttpServletRequest request) {
         String page = SUBJECTS_CATALOG;
@@ -23,6 +20,7 @@ public class CommandSubjectsCatalog implements Command {
         TestDao testDao = new TestDao();
         List<Subject> subjects = testDao.getAllSubjects();
 
+        System.out.println("CommandSubjectCatalpg");
         for(Subject s : subjects) {
             System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
         }
@@ -30,9 +28,6 @@ public class CommandSubjectsCatalog implements Command {
         request.setAttribute("list", subjects);
 
         return page;
-
-//        System.out.println("Going to catalog of the subjects");
-//        receiver.action(CommandList.SUBJECTS_CATALOG);
     }
 
 }

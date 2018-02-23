@@ -1,17 +1,19 @@
 package org.sandromax.fastest.controller.command.impl;
 
 import org.sandromax.fastest.controller.command.Command;
-//import org.sandromax.fastest.controller.command.Receiver;
-import static org.sandromax.fastest.controller.until.constants.Pages.*;
+import org.sandromax.fastest.controller.until.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CommandIndexPage implements Command {
+public class CommandSignInPage implements Command {
+
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = INDEX_PAGE;
+        String page = Pages.SIGN_IN_PAGE;
 
         return page;
     }
+
+
 }
