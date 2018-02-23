@@ -18,15 +18,16 @@
 				<div class="form">
 					<h1 class="title_1">Вход</h1>
 
-						<form>
+						<form action="/controller?command=sign_in" method="post">
 							<fieldset class="signin_info">
 								<label>
 							Ваш Email Адрес
-								<input type="email" name="email-address" placeholder="your@mail.com" required>
+								<input type="email" name="email" placeholder="your@mail.com" required>
 							</label>
 							<label>
 							Ваш пароль
 								<input type="password" name="password" placeholder="5+ символов" required>
+								${param.error}
 							</label>
 						</fieldset>
 						<fieldset class="signin_action">

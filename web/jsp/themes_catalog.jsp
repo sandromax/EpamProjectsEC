@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,8 +53,9 @@
 						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
 				<%--</div>--%>
 
-                <p>subject: ${param.subject}</p><br>
-                <p>command: ${param.command}</p>
+                <p>Subject: ${param.subject}.</p>
+
+                <p>&nbsp;Command: ${param.command}.</p>
 
 
 			</div>
