@@ -1,7 +1,10 @@
 body {
   font-family: 'Open Sans', sans-serif;
   color: #232323;
+}
 
+a {
+  text-decoration: none;
 }
 
 .or_text {
