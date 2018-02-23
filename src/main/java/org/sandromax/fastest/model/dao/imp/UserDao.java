@@ -11,7 +11,7 @@ public class UserDao {
 
     public static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, surname, email, pass) VALUES(?, ?, ?, ?)";
     public static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM students";
-    public static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = '?'";
+    public static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = ?";
 
     boolean addStudent(String name, String surname, String email, String pass) {
         PreparedStatement preparedStatement = null;
@@ -62,12 +62,12 @@ public class UserDao {
         return new LinkedList<>();
     }
 
-    String getEmailByPass(String pass) {
-        PreparedStatement preparedStatement = null;
+    public static String getEmailByPass(String pass) {
+//        PreparedStatement preparedStatement = null;
         String email = "";
 
         try (Connection connection = ConnectionPool.getConnection()) {
-            connection.prepareStatement(SQL_SELECT_STUDENTS_EMAIL_BY_PASS);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_STUDENTS_EMAIL_BY_PASS);
             preparedStatement.setString(1, pass);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -82,6 +82,6 @@ public class UserDao {
             e.printStackTrace();
         }
 
-        return new String();
+        return email;
     }
 }
