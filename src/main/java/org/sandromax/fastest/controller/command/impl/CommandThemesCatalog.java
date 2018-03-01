@@ -16,20 +16,18 @@ public class CommandThemesCatalog implements Command {
         String page = Pages.THEMES_CATALOG;
 
         String subject = request.getParameter("subject");
-//        String subject = "Історія України";
 
         Charset cset = Charset.forName("UTF-8");
         ByteBuffer buf = cset.encode(subject);
         byte[] b = buf.array();
         String utf8Subject = new String(b);
 
-        System.out.println("param subject: " + subject);
         System.out.println("param command: " + request.getParameter("command"));
+        System.out.println("param subject: " + subject);
 
         System.out.println("attr subject: " + request.getAttribute("subject"));
         System.out.println("attr command: " + request.getAttribute("command"));
 
-        request.setAttribute("subject", subject);
 
         TestDao testDao = new TestDao();
         List<Theme> themes = testDao.getThemesBySubject(subject);
@@ -40,9 +38,8 @@ public class CommandThemesCatalog implements Command {
         for(Theme theme : themes) {
             System.out.println(theme.toString());
         }
-
+        request.setAttribute("subject", subject);
         request.setAttribute("title", subject);
-
         request.setAttribute("list", themes);
 
         return page;

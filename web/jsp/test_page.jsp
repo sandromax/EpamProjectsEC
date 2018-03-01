@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/catalog.css">
-    <link rel="stylesheet" href="../css/test.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
     <meta charset="UTF-8">
     <title>Test Page</title>
 </head>

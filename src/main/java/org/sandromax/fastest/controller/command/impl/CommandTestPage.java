@@ -15,6 +15,7 @@ public class CommandTestPage implements Command {
         System.out.println("test page");
 
         RequestInfo.show(request);
+        request.setAttribute("title", request.getParameter("title"));
 
         return page;
     }

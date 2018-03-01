@@ -19,8 +19,9 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    /*align-items: center;*/
 }
 
 .question {
-
+    align-self: center;
 }
