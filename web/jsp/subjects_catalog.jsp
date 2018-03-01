@@ -32,12 +32,6 @@
                 </c:forEach>
             </div>
         </div>
-
-        <form action="controller">
-            <input type="text" name="command" value="themes_catalog">
-            <input type="text" name="subject">
-            <input type="submit" value="GO">
-        </form>
     </main>
 </body>
 </html>

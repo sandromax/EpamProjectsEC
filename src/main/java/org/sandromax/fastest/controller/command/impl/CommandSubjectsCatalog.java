@@ -20,11 +20,12 @@ public class CommandSubjectsCatalog implements Command {
         TestDao testDao = new TestDao();
         List<Subject> subjects = testDao.getAllSubjects();
 
-        System.out.println("CommandSubjectCatalpg");
+        System.out.println("CommandSubjectCatalog");
         for(Subject s : subjects) {
-            System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
+            System.out.println("(id)" + s.getId() + "(name)" + s.getName() + "(lang)" +s.getLang());
         }
 
+        request.setAttribute("title", "Subjects");
         request.setAttribute("list", subjects);
 
         return page;

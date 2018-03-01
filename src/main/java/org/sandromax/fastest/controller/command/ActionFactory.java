@@ -18,15 +18,5 @@ public class ActionFactory {
         }
 
         return command;
-//        switch (cmd){
-//            case MAIN_PAGE:
-//                System.out.println("Creating command 'MainPage' and set up its receiver");
-//                command = new CommandIndexPage(this.receiver);
-//                break;
-//            case SUBJECTS_CATALOG:
-//                System.out.println("Creating command 'SubjectsCatalog' and set up its receiver");
-//                command = new CommandSubjectsCatalog(this.receiver);
-//                break;
-//        }
     }
 }

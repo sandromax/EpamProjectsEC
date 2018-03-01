@@ -19,21 +19,10 @@
 			<div class="text_btn">
 				<h1 class="title_1">Система <span class="or_text">быстрого тестирования</span> студентов</h1>
 				<h2 class="title_2">Только тестирование, никакой рекламы</h2>
-				<a href="jsp/sign_up.jsp" class="btn_fill">Зарегистрироваться</a>
-				<a href="jsp/sign_in.jsp" class="btn_border">Войти</a>
+				<a href="/controller?command=sign_up" class="btn_fill">Зарегистрироваться</a>
+				<a href="/controller?command=sign_in_page" class="btn_border">Войти</a>
 				<div>
-					<form action="controller">
-						<input type="text" name="command" value="subjects_catalog">
-						<input type="submit" value="RUN">
-					</form>
-                    <form action="controller">
-                        <input type="text" name="command" value="main_page">
-                        <input type="submit" value="Go">
-                    </form>
-					<form action="controller">
-						<input type="submit" name="command" value="subjects_catalog"/>
-					</form>
-
+					<hr>
 					<a href="/controller?command=subjects_catalog">Subjects</a>
 					<hr/>
 					<a href="/controller?command=themes_catalog">Themes</a>
@@ -43,8 +32,6 @@
 						<input type="text" name="subject" value="SQL">
 						<input type="submit" value="THEMES by SQL">
 					</form>
-					<hr>
-					<a href="/controller?command=test_page">Test</a>
 				</div>
 			</div>
 		</div>

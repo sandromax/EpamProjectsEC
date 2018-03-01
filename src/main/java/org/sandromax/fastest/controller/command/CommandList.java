@@ -9,14 +9,16 @@ import org.sandromax.fastest.controller.command.impl.*;
  */
 public enum CommandList {
     SIGN_IN_PAGE(new CommandSignInPage()),
-    SIGN_IN(new CommandSignIn()),
+    SIGN_IN(new CommandSignInPankaj()),
     SIGN_UP(new CommandSignUp()),
+    SIGN_OUT(new CommandSignOut()),
     MAIN_PAGE(new CommandIndexPage()),
     SUBJECTS_CATALOG(new CommandSubjectsCatalog()),
     THEMES_CATALOG(new CommandThemesCatalog()),
     TEST_PAGE(new CommandTestPage()),
     TEST_RESULT_PAGE(new CommandTestResultPage()),
-    ADMIN_PAGE(new CommandAdminPage());
+    ADMIN_PAGE(new CommandAdminPage()),
+    TEST_FIELD(new CommandTestField());
 
     private CommandList(Command command) {
         this.command = command;

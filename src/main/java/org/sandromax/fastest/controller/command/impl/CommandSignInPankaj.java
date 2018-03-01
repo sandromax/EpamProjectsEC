@@ -10,7 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class CommandSignIn implements Command {
+public class CommandSignInPankaj implements Command {
     @Override
     public String execute(HttpServletRequest request) {
         String page, emailDb, passDb;
