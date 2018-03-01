@@ -23,12 +23,12 @@
     <div class="head">
         <div class="flex-head">
             <a href="/controller?command=main_page" class="logo"></a>
-            <p class="head_title">Subjects</p>
+            <p class="head_title">${title}</p>
             <div class="dropdown">
-                <button class="dropbtn">Александр Сокур</button>
+                <button class="dropbtn">${em}</button>
                 <div class="triangle-right"></div>
                 <div class="dropdown-content">
-                    <a href="index.html">Выйти</a>
+                    <a href="/controller?command=sign_out">Выйти</a>
                 </div>
             </div>
         </div>

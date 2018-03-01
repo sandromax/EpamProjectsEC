@@ -16,14 +16,14 @@
 	<main>
 		
 		<div class="catalog_section">
-			<h2 class="title_test"><a href="/controller?command=subjects_catalog">${param.subject}</a></h2>
+			<h2 class="title_test"><a href="/controller?command=subjects_catalog">Предметы</a></h2>
 			<div class="flex-catalog">
 
                 <c:forEach items="${list}" var="item">
                     <div class="card_catalog">
                         <p class="card_title"><c:out value="${item.getName()}" /></p>
                         <div class="triangle"></div>
-                        <a href ="/controller?command=themes_catalog&subject=${item.getName()}" class="btn_card">Пройти тест</a>
+                        <a href ="/controller?command=test_page&subject=${item.getName()}&title=Тест:${item.getName()}" class="btn_card">Пройти тест</a>
                     </div>
                 </c:forEach>
 
@@ -53,7 +53,7 @@
 						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
 				<%--</div>--%>
 
-                <p>Subject: ${param.subject}.</p>
+                <p>Subject: ${subject}.</p>
 
                 <p>&nbsp;Command: ${param.command}.</p>
 
