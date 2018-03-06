@@ -9,7 +9,7 @@ import org.sandromax.fastest.controller.command.impl.*;
  */
 public enum CommandList {
     SIGN_IN_PAGE(new CommandSignInPage()),
-    SIGN_IN(new CommandSignInPankaj()),
+    SIGN_IN(new CommandSignIn()),
     SIGN_UP_PAGE(new CommandSignUpPage()),
     SIGN_UP(new CommandSignUp()),
     SIGN_OUT(new CommandSignOut()),

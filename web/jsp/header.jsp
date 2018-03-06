@@ -25,7 +25,7 @@
             <a href="/controller?command=main_page" class="logo"></a>
             <p class="head_title">${title}</p>
             <div class="dropdown">
-                <button class="dropbtn">${em}</button>
+                <button class="dropbtn">${user_name}</button>
                 <div class="triangle-right"></div>
                 <div class="dropdown-content">
                     <a href="/controller?command=sign_out">Выйти</a>

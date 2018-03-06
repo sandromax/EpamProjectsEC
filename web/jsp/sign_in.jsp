@@ -20,7 +20,7 @@
                 <h1 class="title_1">Вход</h1>
                 <p class="or_text" style="font-size: small">${error}</p><br>
 
-                <form action="/controller?command=test_field" method="post">
+                <form action="/controller?command=sign_in" method="post">
                     <fieldset class="signin_info">
                         <label>
                             Ваш Email Адрес

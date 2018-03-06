@@ -3,6 +3,7 @@ package org.sandromax.fastest.controller.command.impl;
 import org.sandromax.fastest.controller.command.Command;
 import org.sandromax.fastest.controller.until.constants.Pages;
 import org.sandromax.fastest.domain.test.Subject;
+import org.sandromax.fastest.model.dao.imp.BCrypt;
 import org.sandromax.fastest.model.dao.imp.TestDao;
 import org.sandromax.fastest.model.dao.imp.UserDao;
 
@@ -16,18 +17,21 @@ public class CommandSignIn implements Command {
         String page = Pages.SIGN_IN_PAGE;
 
         String emailParam = request.getParameter("email");
-        String passwordParam = request.getParameter("password");
+        String passParam = request.getParameter("password");
+        System.out.println("CommandSignIn output\nemail: " + emailParam + ", " + "password: " + passParam);
 
-        System.out.println("email: " + emailParam + ", " + "password: " + passwordParam);
-
-        String emailDb = UserDao.getEmailByPass(passwordParam);
+        String passDb = UserDao.getPassByEmail(emailParam);
+        System.out.println("passDb: " + passDb);
 
         HttpSession session = request.getSession();
 
+        System.out.println("check: " + BCrypt.checkpw(passParam, passDb));
 
-        if(emailDb.length() != 0) {
+        String name = UserDao.getNameByEmail(emailParam);
 
-            session.setAttribute("em", emailDb);
+        if(passDb.length() != 0 && (BCrypt.checkpw(passParam, passDb))) {
+
+            session.setAttribute("user_name", name);
 
             TestDao testDao = new TestDao();
             List<Subject> subjects = testDao.getAllSubjects();
@@ -45,7 +49,6 @@ public class CommandSignIn implements Command {
             page = Pages.SIGN_IN_PAGE;
             request.setAttribute("error", "wrong email or password");
         }
-
 
         return page;
     }

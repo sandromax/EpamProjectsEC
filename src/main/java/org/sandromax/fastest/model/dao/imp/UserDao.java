@@ -12,29 +12,10 @@ public class UserDao {
     public static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, email, pass) VALUES(?, ?, ?)";
     public static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM students";
     public static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = ?";
+    public static final String SQL_SELECT_PASS_BY_EMAIL = "SELECT pass FROM students WHERE email = ?";
+    public static final String SQL_SELECT_NAME_BY_EMAIL = "SELECT name FROM students WHERE email = ?";
 
-    //  not secure
-    boolean addStudentNotSecure(String name, String surname, String email, String pass) {
-        PreparedStatement preparedStatement = null;
-
-        try (Connection connection = ConnectionPool.getConnection()) {
-            connection.prepareStatement(SQL_INSERT_STUDENT);
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, surname);
-            preparedStatement.setString(3, email);
-            preparedStatement.setString(4, pass);
-
-            preparedStatement.executeUpdate();
-
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
+    //  OK
     public static boolean addStudent(String name, String email, String pass) {
         String passHash = BCrypt.hashpw(pass, BCrypt.gensalt(12));
 
@@ -54,6 +35,52 @@ public class UserDao {
 
         return false;
     }
+
+    //  OK
+    public static String getPassByEmail(String email) {
+        String pass = "";
+
+        try (Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_SELECT_PASS_BY_EMAIL);
+            ps.setString(1, email);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                pass = resultSet.getString("pass");
+            }
+
+            return pass;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return pass;
+    }
+
+    public static String getNameByEmail(String email) {
+        String name = "";
+
+        try (Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_SELECT_NAME_BY_EMAIL);
+            ps.setString(1, email);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                name = resultSet.getString("name");
+            }
+
+            return name;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+
 
     public List<Student> getAllStudents() {
         List<Student> resultList = new LinkedList<>();
@@ -87,6 +114,8 @@ public class UserDao {
     //  not secure
     public static String getEmailByPass(String pass) {
         String email = "";
+
+//        String passHash = BCrypt.hashpw(pass, BCrypt.gensalt(12));
 
         try (Connection connection = ConnectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_STUDENTS_EMAIL_BY_PASS);
