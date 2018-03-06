@@ -19,7 +19,7 @@
 			<div class="text_btn">
 				<h1 class="title_1">Система <span class="or_text">быстрого тестирования</span> студентов</h1>
 				<h2 class="title_2">Только тестирование, никакой рекламы</h2>
-				<a href="/controller?command=sign_up" class="btn_fill">Зарегистрироваться</a>
+				<a href="/controller?command=sign_up_page" class="btn_fill">Зарегистрироваться</a>
 				<a href="/controller?command=sign_in_page" class="btn_border">Войти</a>
 				<div>
 					<hr>

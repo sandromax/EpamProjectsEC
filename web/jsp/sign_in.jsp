@@ -48,7 +48,7 @@
     </div>
 
     <div class="signin_footer">
-        <p class="sign_title">Нет аккаунта? <a class="link" href="sign_up.jsp">Зарегистрируйтесь</a></p>
+        <p class="sign_title">Нет аккаунта? <a class="link" href="/controller?command=sign_up_page">Зарегистрируйтесь</a></p>
     </div>
 
 </main>

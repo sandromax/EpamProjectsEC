@@ -9,11 +9,12 @@ import java.util.List;
 
 public class UserDao {
 
-    public static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, surname, email, pass) VALUES(?, ?, ?, ?)";
+    public static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, email, pass) VALUES(?, ?, ?)";
     public static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM students";
     public static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = ?";
 
-    boolean addStudent(String name, String surname, String email, String pass) {
+    //  not secure
+    boolean addStudentNotSecure(String name, String surname, String email, String pass) {
         PreparedStatement preparedStatement = null;
 
         try (Connection connection = ConnectionPool.getConnection()) {
@@ -23,10 +24,30 @@ public class UserDao {
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, pass);
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
             return true;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean addStudent(String name, String email, String pass) {
+        String passHash = BCrypt.hashpw(pass, BCrypt.gensalt(12));
+
+        try(Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_INSERT_STUDENT);
+
+            ps.setString(1, name);
+            ps.setString(2, email);
+            ps.setString(3, passHash);
+
+            ps.execute();
+
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,8 +83,9 @@ public class UserDao {
         return new LinkedList<>();
     }
 
+    //  OK
+    //  not secure
     public static String getEmailByPass(String pass) {
-//        PreparedStatement preparedStatement = null;
         String email = "";
 
         try (Connection connection = ConnectionPool.getConnection()) {

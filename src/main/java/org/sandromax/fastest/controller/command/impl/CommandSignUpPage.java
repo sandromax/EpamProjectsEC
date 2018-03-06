@@ -5,12 +5,10 @@ import org.sandromax.fastest.controller.until.constants.Pages;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class CommandSignInSimple implements Command {
+public class CommandSignUpPage implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = Pages.SIGN_IN_PAGE;
-
-
+        String page = Pages.SIGN_UP_PAGE;
 
         return page;
     }

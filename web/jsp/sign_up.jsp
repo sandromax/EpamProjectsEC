@@ -18,19 +18,19 @@
 				<div class="form">
 					<h1 class="title_1">Регистрация</h1>
 
-						<form>
+						<form action="/controller?command=sign_up" method="post">
 							<fieldset class="signup_info">
 								<label>
 							Ваш Email Адрес
-								<input type="email" name="email-address" placeholder="your@mail.com" required>
+								<input type="email" name="email" placeholder="your@mail.com" required>
 							</label>
 							<label>
 							Ваше полное имя
-								<input type="text" name="username" placeholder="Александр Сокур" required>
+								<input type="text" name="name" placeholder="Александр Сокур" required>
 							</label>
 							<label>
 							Ваш пароль
-								<input type="password" name="password" placeholder="5+ символов" required>
+								<input type="password" name="pass" placeholder="5+ символов" required>
 							</label>
 						</fieldset>
 						<fieldset class="signup_action">

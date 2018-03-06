@@ -27,35 +27,9 @@
                     </div>
                 </c:forEach>
 
-				<%--<div class="card_catalog">--%>
-						<%--<p class="card_title">Африка</p>--%>
-						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
-				<%--</div>--%>
-
-				<%--<div class="card_catalog">--%>
-						<%--<p class="card_title">Тасмания</p>--%>
-						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
-				<%--</div>--%>
-
-				<%--<div class="card_catalog">--%>
-						<%--<p class="card_title">Гималаи</p>--%>
-						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
-				<%--</div>--%>
-
-				<%--<div class="card_catalog">--%>
-						<%--<p class="card_title">Западная европа</p>--%>
-						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
-
-				<%--</div>--%>
-
-				<%--<div class="card_catalog">--%>
-						<%--<p class="card_title">Карибский архипелаг</p>--%>
-						<%--<a href ="#" class="btn_card">Пройти тест</a>--%>
-				<%--</div>--%>
-
                 <p>Subject: ${subject}.</p>
 
-                <p>&nbsp;Command: ${param.command}.</p>
+                <p>&nbsp;param.command: ${param.command}.</p>
 
 
 			</div>
