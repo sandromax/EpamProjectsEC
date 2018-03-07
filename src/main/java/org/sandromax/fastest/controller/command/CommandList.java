@@ -19,6 +19,7 @@ public enum CommandList {
     TEST_PAGE(new CommandTestPage()),
     TEST_RESULT_PAGE(new CommandTestResultPage()),
     ADMIN_PAGE(new CommandAdminPage()),
+    GET_TESTS_FROM_FILE(new CommandGetTestsFromFile()),
     TEST_FIELD(new CommandTestField());
 
     private CommandList(Command command) {

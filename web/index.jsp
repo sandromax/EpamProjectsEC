@@ -32,6 +32,8 @@
 						<input type="text" name="subject" value="SQL">
 						<input type="submit" value="THEMES by SQL">
 					</form>
+					<hr>
+					<a href="/controller?command=admin_page">Admin Page</a>
 				</div>
 			</div>
 		</div>
