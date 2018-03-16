@@ -6,6 +6,7 @@ import org.sandromax.fastest.domain.test.Theme;
 import org.sandromax.fastest.model.dao.connection.impl.ConnectionPool;
 
 import java.sql.*;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -15,6 +16,10 @@ public class TestDao {
     public static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
     public static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
     public static final String SQL_SELECT_THEMES_BY_SQL = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = 'SQL'";
+    public static final String SQL_INSERT_ISSUE = "INSERT INTO issues(subject_id, theme_id, question, pos_answer_1, pos_answer_2, pos_answer_3, pos_answer_4, right_answer, lang)VALUES(1, 1, ?, ?, ?, ?, ?, ?, ?)";
+
+    //  (SELECT id FROM subjects WHERE name = ? )
+    //  (SELECT id FROM themes WHERE name = ?)
 
 
     /**
@@ -82,7 +87,38 @@ public class TestDao {
         return themes;
     }
 
-    List<Issue> getIssuesByThemeAndLang(int themeId, String lang) {
+    public boolean addIssues(HashSet<Issue> issuesHashSet) {
+        boolean result = false;
+        int counter = 0;
+
+        try (Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_INSERT_ISSUE);
+
+            for (Issue issue : issuesHashSet) {
+//                ps.setString(1, issue.getSubject());
+//                ps.setString(1, issue.getTheme());
+                ps.setString(1, issue.getQuestion());
+                ps.setString(2, issue.getAnswers().get(0));
+                ps.setString(3, issue.getAnswers().get(1));
+                ps.setString(4, issue.getAnswers().get(2));
+                ps.setString(5, issue.getAnswers().get(3));
+                ps.setString(6, issue.getRightAnswer());
+                ps.setString(7, issue.getLanguage().getLanguage());
+
+
+
+                ps.execute();
+                counter++;
+            }
+
+            result = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+        List<Issue> getIssuesByThemeAndLang(int themeId, String lang) {
         return new LinkedList<>();
     }
 

@@ -3,6 +3,7 @@ package org.sandromax.fastest.controller;
 import org.sandromax.fastest.controller.command.*;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,13 @@ import java.util.Enumeration;
 
 @WebServlet(name = "controller", urlPatterns = {"/controller"})
 public class MainController extends HttpServlet {
+    private String encoding;
+    @Override
+    public void init() throws ServletException {
+        ServletConfig config = getServletConfig();
+        encoding = config.getInitParameter("PARAMETER_ENCODING");
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -25,6 +33,22 @@ public class MainController extends HttpServlet {
     }
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //  UTF-8 problem fix
+//        System.out.println("inside servled encoding req: "+req.getCharacterEncoding());
+        if(encoding != null) {
+            System.out.println("encoding is null. UTF-8 fixing ...");
+            req.setCharacterEncoding(encoding);
+        }
+
+        String page = null;
+        ActionFactory action = new ActionFactory();
+        Command command = action.defineCommand(req);
+        page = command.execute(req);
+
+        if(page != null) {
+            req.getRequestDispatcher(page).forward(req, resp);
+
+        }
 //        String param = req.getParameter("punct");
 //        req.setAttribute("punctP", param);
 //
@@ -77,24 +101,6 @@ public class MainController extends HttpServlet {
 //        Command commandMainPage = actionFactory.defineCommand(CommandList.MAIN_PAGE);
 //        Invoker invokerMainPage = new Invoker(commandMainPage);
 //        invokerMainPage.invokeCommand();
-
-        String page = null;
-        ActionFactory action = new ActionFactory();
-        Command command = action.defineCommand(req);
-        page = command.execute(req);
-
-        if(page != null) {
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-//            dispatcher.forward(req, resp);
-
-//            Enumeration<String> collection = req.getAttributeNames();
-//            while(collection.hasMoreElements()) {
-//                System.out.println("elem:" + collection.nextElement());
-//            }
-
-            req.getRequestDispatcher(page).forward(req, resp);
-
-        }
 
     }
 }

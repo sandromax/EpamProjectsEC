@@ -6,7 +6,7 @@
   Time: 19:24
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:500,600" rel="stylesheet">
@@ -28,6 +28,8 @@
                             <p class="card_title"><c:out value="${item.getName()}" /></p>
                             <div class="triangle"></div>
                             <a href ="/controller?command=themes_catalog&subject=${item.getName()}" class="btn_card">Перейти</a>
+                            <%--${item.getName()}--%>
+                            <%--Математика--%>
                         </div>
                 </c:forEach>
             </div>

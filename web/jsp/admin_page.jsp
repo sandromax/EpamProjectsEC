@@ -5,12 +5,13 @@
   Time: 12:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Administration</title>
 </head>
 <body>
+<jsp:include page="header.jsp" flush="true"></jsp:include>
 Bonjour, monsier!
 <form action="/controller?<command=get_tests_from_file" method="post" enctype="multipart/form-data">
     <p>Укажите файл с тестами</p>

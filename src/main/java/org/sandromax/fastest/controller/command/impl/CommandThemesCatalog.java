@@ -24,6 +24,9 @@ public class CommandThemesCatalog implements Command {
 
         System.out.println("param command: " + request.getParameter("command"));
         System.out.println("param subject: " + subject);
+        System.out.println(subject.length());
+        System.out.println("param utf-subject: " + utf8Subject);
+        System.out.println(utf8Subject.length());
 
         System.out.println("attr subject: " + request.getAttribute("subject"));
         System.out.println("attr command: " + request.getAttribute("command"));

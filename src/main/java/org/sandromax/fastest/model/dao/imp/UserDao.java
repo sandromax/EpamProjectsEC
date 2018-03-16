@@ -15,6 +15,8 @@ public class UserDao {
     public static final String SQL_SELECT_PASS_BY_EMAIL = "SELECT pass FROM students WHERE email = ?";
     public static final String SQL_SELECT_NAME_BY_EMAIL = "SELECT name FROM students WHERE email = ?";
 
+
+
     //  OK
     public static boolean addStudent(String name, String email, String pass) {
         String passHash = BCrypt.hashpw(pass, BCrypt.gensalt(12));
