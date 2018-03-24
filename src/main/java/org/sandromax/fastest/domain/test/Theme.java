@@ -40,6 +40,6 @@ public class Theme {
 
     @Override
     public String toString() {
-        return "ID in DB: " + idInDb + " name: " + name + " subject name: " + subject.getName();
+        return "ID in DB: " + idInDb + "; theme name: " + name + "; subject name: " + subject.getName();
     }
 }
