@@ -14,28 +14,23 @@
 <body>
     <jsp:include page="header.jsp" flush="true"></jsp:include>
 	<main>
-		
 		<div class="catalog_section">
-			<h2 class="title_test"><a href="/controller?command=subjects_catalog">Предметы</a></h2>
+			<h2 class="card_title"><a href="/controller?command=subjects_catalog">&#11013; к предметам</a></h2>
 			<div class="flex-catalog">
 
                 <c:forEach items="${list}" var="item">
                     <div class="card_catalog">
-                        <p class="card_title"><c:out value="${item.getName()}" /></p>
+                        <p class="card_title return"><c:out value="${item.getName()}" /></p>
                         <div class="triangle"></div>
-                        <a href ="/controller?command=test_page&subject=${item.getName()}&title=Тест:${item.getName()}" class="btn_card">Пройти тест</a>
+                        <a href ="/controller?command=test_page&theme=${item.getName()}&title=Тест: ${subject} ${item.getName()}" class="btn_card">Пройти тест</a>
                     </div>
                 </c:forEach>
 
                 <p>Subject: ${subject}.</p>
 
                 <p>&nbsp;param.command: ${param.command}.</p>
-
-
 			</div>
 		</div>
-		
 	</main>
-	
 </body>
 </html>

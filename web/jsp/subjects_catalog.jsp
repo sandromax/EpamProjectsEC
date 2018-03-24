@@ -34,6 +34,9 @@
                 </c:forEach>
             </div>
         </div>
+        <p>Subject: ${subject-list}.</p>
+
+        <p>&nbsp;param.command: ${command}.</p>
     </main>
 </body>
 </html>

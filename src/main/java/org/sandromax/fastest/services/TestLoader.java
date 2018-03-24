@@ -1,6 +1,8 @@
 package org.sandromax.fastest.services;
 
 import org.sandromax.fastest.domain.test.Issue;
+import org.sandromax.fastest.domain.test.Subject;
+import org.sandromax.fastest.domain.test.Theme;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 public class TestLoader {
     public HashSet<Issue> download(String filePath) throws IOException {
@@ -27,25 +30,35 @@ public class TestLoader {
 
     public HashSet handle(LinkedList<String> rows) {
         int rowCounter = 87;
-        HashSet<Issue> testsSet = new HashSet<>();
-        String lang = "";
-        String subject = "";
-        String theme = "";
+        HashSet<Issue> issues = new HashSet<>();
+
+
+        String langName = "";
+        String subjectName = "";
+        Subject subject;
+
+        String themeName = "";
+        Theme theme;
+
         String question= "";
         String rightAnswer= "";
         LinkedList<String> answers= new LinkedList<>();
 
         for(String str : rows) {
             if(rowCounter == 87) {
-                lang = str;
+                langName = str;
                 rowCounter++;
             } else if(rowCounter == 88) {
-                subject = str;
+                subjectName = str;
                 rowCounter++;
             }
             else if(rowCounter == 89) {
-                theme = str;
+                themeName = str;
+                rowCounter++;
+            }
+            else if(rowCounter == 90) {
                 rowCounter = 1;
+                continue;
             }
             else if(rowCounter == 1) {
                 question = str;
@@ -77,6 +90,9 @@ public class TestLoader {
             }
             else if(rowCounter == 8) {
                 rightAnswer = str;
+                subject = new Subject(subjectName, new Locale(langName));
+                theme = new Theme(themeName, subject);
+                issues.add(new Issue(theme, question, rightAnswer, answers));
                 rowCounter++;
             }
             else if(rowCounter == 9) {
@@ -84,18 +100,13 @@ public class TestLoader {
                 continue;
             }
             else if(rowCounter == 10) {
-                rowCounter++;
-                continue;
-            }
-            else if(rowCounter == 11) {
-                testsSet.add(new Issue(lang, subject, theme, question, rightAnswer, answers));
-                question= "";
-                rightAnswer= "";
-                answers= new LinkedList<>();
+                question = "";
+                rightAnswer = "";
+                answers = new LinkedList<>();
                 rowCounter = 1;
             }
         }
 
-        return testsSet;
+        return issues;
     }
 }

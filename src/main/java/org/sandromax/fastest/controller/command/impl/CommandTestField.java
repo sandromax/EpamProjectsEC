@@ -34,7 +34,7 @@ public class CommandTestField implements Command {
 //
 //            System.out.println("Subjects:");
 //            for(Subject s : subjects) {
-//                System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
+//                System.out.println("(id)" + s.getIdInDb() + " (name)" + s.getName() + " (lang)" +s.getLang());
 //            }
 //
 //            request.setAttribute("title", "Subjects");

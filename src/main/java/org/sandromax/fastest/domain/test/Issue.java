@@ -1,58 +1,49 @@
 package org.sandromax.fastest.domain.test;
 
 import java.util.LinkedList;
-import java.util.Locale;
 
 /**
  * @author Oleksandr Maksymenko 2017.01.09
  */
 public class Issue {
-        private Locale language;
-        private String subject;
-        private String theme;
-        private String question;
-        private String rightAnswer;
-        private LinkedList<String> answers;
+    private int idInDb;
+    private Theme theme;
+    private String question;
+    private String rightAnswer;
+    private LinkedList<String> variantAnswers;
 
-        public Issue() {
-            language = new Locale("uk");
-            subject = "";
-            theme = "";
-            question = "";
-            rightAnswer = "";
-            answers = new LinkedList<>();
-        }
-
-        public Issue(String language, String subject, String theme, String question, String rightAnswer, LinkedList<String> answers) {
-            this.language = new Locale(language);
-            this.subject = subject;
-            this.theme = theme;
-            this.question = question;
-            this.rightAnswer = rightAnswer;
-            this.answers = answers;
-        }
-
-    public Locale getLanguage() {
-        return language;
+    public Issue() {
     }
 
-    public void setLanguage(Locale language) {
-        this.language = language;
+    public Issue(Theme theme, String question, String rightAnswer, LinkedList<String> variantAnswers) {
+        this.idInDb = 0;
+        this.theme = theme;
+        this.question = question;
+        this.rightAnswer = rightAnswer;
+        this.variantAnswers = variantAnswers;
     }
 
-    public String getSubject() {
-        return subject;
+    public Issue(int idInDb, Theme theme, String question, String rightAnswer, LinkedList<String> variantAnswers) {
+        this.idInDb = idInDb;
+        this.theme = theme;
+        this.question = question;
+        this.rightAnswer = rightAnswer;
+        this.variantAnswers = variantAnswers;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public int getIdInDb() {
+        return idInDb;
     }
 
-    public String getTheme() {
+    public void setIdInDb(int idInDb) {
+        this.idInDb = idInDb;
+    }
+
+    public Theme getTheme() {
         return theme;
     }
 
-    public void setTheme(String theme) {
+    public void setTheme(Theme theme) {
         this.theme = theme;
     }
 
@@ -72,16 +63,16 @@ public class Issue {
         this.rightAnswer = rightAnswer;
     }
 
-    public LinkedList<String> getAnswers() {
-        return answers;
+    public LinkedList<String> getVariantAnswers() {
+        return variantAnswers;
     }
 
-    public void setAnswers(LinkedList<String> answers) {
-        this.answers = answers;
+    public void setVariantAnswers(LinkedList<String> variantAnswers) {
+        this.variantAnswers = variantAnswers;
     }
 
     @Override
-        public String toString() {
-            return "\nsubject: "+subject+"\ntheme: "+theme+"\nquestion: "+question+"\nright: "+rightAnswer+"\nanswers: "+answers.toString()+"\n";
-        }
+    public String toString() {
+        return "\nID in DB: "+idInDb+"\nsubject: " + theme.getSubject().getName() + "\ntheme: " + theme + "\nquestion: " + question + "\nright: " + rightAnswer + "\nvariantAnswers: " + variantAnswers.toString() + "\n";
+    }
 }

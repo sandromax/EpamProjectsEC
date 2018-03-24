@@ -3,28 +3,25 @@ package org.sandromax.fastest.domain.test;
 import java.util.Locale;
 
 public class Subject {
-    private int id;
+    private int idInDb;
     private String name;
     private Locale lang;
 
     public Subject() {
-        id = 0;
-        name = "";
-        lang = new Locale("uk");
     }
 
-    public Subject(int id, String name, Locale lang) {
-        this.id = id;
+    public Subject(String name, Locale lang) {
+        this.idInDb = 0;
         this.name = name;
         this.lang = lang;
     }
 
     public int getId() {
-        return id;
+        return idInDb;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idInDb) {
+        this.idInDb = idInDb;
     }
 
     public String getName() {

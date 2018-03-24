@@ -1,33 +1,25 @@
 package org.sandromax.fastest.domain.test;
 
-import java.util.Locale;
-
 public class Theme {
-    private int id;
+    private int idInDb;
     private String name;
     private Subject subject;
-    private Locale lang;
 
     public Theme() {
-        id = 0;
-        name = "";
-        subject = new Subject();
-        lang = new Locale("uk");
     }
 
-    public Theme(int id, String name, Subject subject, Locale lang) {
-        this.id = id;
+    public Theme(String name, Subject subject) {
+        this.idInDb = 0;
         this.name = name;
         this.subject = subject;
-        this.lang = lang;
     }
 
-    public int getId() {
-        return id;
+    public int getIdInDb() {
+        return idInDb;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdInDb(int idInDb) {
+        this.idInDb = idInDb;
     }
 
     public String getName() {
@@ -46,16 +38,8 @@ public class Theme {
         this.subject = subject;
     }
 
-    public Locale getLang() {
-        return lang;
-    }
-
-    public void setLang(Locale lang) {
-        this.lang = lang;
-    }
-
     @Override
     public String toString() {
-        return "Id: " + id + " name: " + name + " subject name: " + subject.getName() + " lang: " + lang.getLanguage();
+        return "ID in DB: " + idInDb + " name: " + name + " subject name: " + subject.getName();
     }
 }

@@ -13,14 +13,11 @@ import java.util.Locale;
 
 public class TestDao {
 
-    public static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
-    public static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
-    public static final String SQL_SELECT_THEMES_BY_SQL = "SELECT themes.id, themes.name, subjects.id, subjects.name, themes.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = 'SQL'";
-    public static final String SQL_INSERT_ISSUE = "INSERT INTO issues(subject_id, theme_id, question, pos_answer_1, pos_answer_2, pos_answer_3, pos_answer_4, right_answer, lang)VALUES(1, 1, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
+    private static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, subjects.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
 
     //  (SELECT id FROM subjects WHERE name = ? )
     //  (SELECT id FROM themes WHERE name = ?)
-
 
     /**
      * analog - getAll
@@ -40,7 +37,8 @@ public class TestDao {
                 name = resultSet.getString("name");
                 lang = resultSet.getString("lang");
 
-                Subject subject = new Subject(id, name, new Locale(lang));
+                Subject subject = new Subject(name, new Locale(lang));
+                subject.setId(id);
 
                 subjects.add(subject);
             }
@@ -55,8 +53,7 @@ public class TestDao {
         return new LinkedList<>();
     }
 
-    public List<Theme> getThemesBySubject(String subjectName) {
-//        PreparedStatement preparedStatement = null;
+    public List<Theme> getThemesBySubjectName(String subjectName) {
         int themesId, subjectId = 0;
         String name, lang = "";
         List<Theme> themes = new LinkedList<>();
@@ -64,7 +61,7 @@ public class TestDao {
         try(Connection connection = ConnectionPool.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_THEMES_BY_SUBJECT_NAME);
             preparedStatement.setString(1, subjectName);
-//
+
             ResultSet rs = preparedStatement.executeQuery();
 
 //            Statement statement = connection.createStatement();
@@ -77,7 +74,10 @@ public class TestDao {
                 subjectName = rs.getString(4);
                 lang = rs.getString(5);
 
-                Theme theme = new Theme(themesId, name, new Subject(subjectId, subjectName, new Locale(lang)), new Locale(lang));
+                Subject subject = new Subject(subjectName, new Locale(lang));
+                subject.setId(subjectId);
+                Theme theme = new Theme(name, subject);
+                theme.setIdInDb(themesId);
 
                 themes.add(theme);
             }
@@ -87,30 +87,57 @@ public class TestDao {
         return themes;
     }
 
-    public boolean addIssues(HashSet<Issue> issuesHashSet) {
+    public void downloadIssues(HashSet<Issue> issues, boolean deleteRepeats) {
+        Issue issue = issues.iterator().next();
+
+        checkTheme(issue);
+        if(deleteRepeats) {
+            HashSet<Issue> issuesNoRepeats = checkQuestions(issues);
+            if(issuesNoRepeats.size() > 0)
+                insertIssues(issuesNoRepeats);
+        } else {
+            insertIssues(issues);
+        }
+
+    }
+
+    private static final String  SQL_INSERT_ISSUE = "INSERT INTO issues(theme_id, question, pos_answer_1, pos_answer_2, pos_answer_3, pos_answer_4, right_answer)VALUES(?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_SELECT_ID_FROM_THEMES = "SELECT id FROM themes WHERE name = ?;";
+
+    public boolean insertIssues(HashSet<Issue> issuesHashSet) {
         boolean result = false;
         int counter = 0;
 
-        try (Connection connection = ConnectionPool.getConnection()) {
+        try (Connection connection = ConnectionPool.getConnection();
+                Connection additionalConnection = ConnectionPool.getConnection()) {
+
+            PreparedStatement psAdd = additionalConnection.prepareStatement(SQL_SELECT_ID_FROM_THEMES);
+
+            ResultSet rs;
+            int themeId = 0;
+            String themeName = issuesHashSet.iterator().next().getTheme().getName();
+            psAdd.setString(1, themeName);
+            rs = psAdd.executeQuery();
+            while (rs.next()){
+                themeId = rs.getInt(1);
+            }
+
             PreparedStatement ps = connection.prepareStatement(SQL_INSERT_ISSUE);
 
             for (Issue issue : issuesHashSet) {
-//                ps.setString(1, issue.getSubject());
-//                ps.setString(1, issue.getTheme());
-                ps.setString(1, issue.getQuestion());
-                ps.setString(2, issue.getAnswers().get(0));
-                ps.setString(3, issue.getAnswers().get(1));
-                ps.setString(4, issue.getAnswers().get(2));
-                ps.setString(5, issue.getAnswers().get(3));
-                ps.setString(6, issue.getRightAnswer());
-                ps.setString(7, issue.getLanguage().getLanguage());
-
-
+                ps.setInt(1, themeId);
+                ps.setString(2, issue.getQuestion());
+                ps.setString(3, issue.getVariantAnswers().get(0));
+                ps.setString(4, issue.getVariantAnswers().get(1));
+                ps.setString(5, issue.getVariantAnswers().get(2));
+                ps.setString(6, issue.getVariantAnswers().get(3));
+                ps.setString(7, issue.getRightAnswer());
 
                 ps.execute();
                 counter++;
             }
 
+            System.out.println("Added " + counter + " issues.");
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,11 +145,87 @@ public class TestDao {
         return result;
     }
 
-        List<Issue> getIssuesByThemeAndLang(int themeId, String lang) {
-        return new LinkedList<>();
+    private static final String SQL_FIND_THEME_BY_NAME = "SELECT * FROM themes WHERE name = ?";
+
+    private boolean isNewTheme(String theme) {
+        try(Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_FIND_THEME_BY_NAME);
+            ps.setString(1, theme);
+            if(ps.execute())
+                return false;
+            else
+                return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
-    boolean addIssues(LinkedList<Issue> issues) {
-        return true;
+    private static final String SQL_INSERT_NEW_SUBJECT = "INSERT INTO subjects(name, lang) VALUES(?, ?);";
+    private static final String SQL_INSERT_NEW_THEME = "INSERT INTO themes(name, subject_id) VALUES(?, ?);";
+
+    private boolean addNewTheme(Theme theme, Subject subject) {
+        try(Connection conSubject = ConnectionPool.getConnection();
+            Connection conTheme = ConnectionPool.getConnection()) {
+
+            PreparedStatement psSubject = conSubject.prepareStatement(SQL_INSERT_NEW_SUBJECT);
+            PreparedStatement psTheme = conTheme.prepareStatement(SQL_INSERT_NEW_THEME);
+
+            psSubject.setString(1, subject.getName());
+            psSubject.setString(2, subject.getLang().getLanguage());
+            psSubject.executeUpdate();
+
+            psTheme.setString(1, theme.getName());
+            psTheme.setInt(2, subject.getId());
+            psTheme.executeUpdate();
+
+            System.out.println("Subject " + subject.getName() + " was added.");
+            System.out.println("Theme " + theme.getName() + " was added.");
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private static final String SQL_FIND_THEME = "SELECT * FROM themes WHERE name = ?;";
+
+    private void checkTheme(Issue issue) {
+        if(isNewTheme(issue.getTheme().getName())) {
+            Subject newSubject = issue.getTheme().getSubject();
+            Theme newTheme = issue.getTheme();
+            addNewTheme(newTheme, newSubject);
+
+            System.out.println("Subject: " + issue.getTheme().getSubject().getName() + " is new.");
+            System.out.println("and it was added");
+            System.out.println("Theme: " + issue.getTheme() + " is new.");
+            System.out.println("and it was added");
+        } else
+            System.out.println("Theme: " + issue.getTheme() + " is not new.");
+    }
+
+    public static final String SQL_FIND_ISSUE_BY_QUESTION = "SELECT * FROM issues WHERE question = ?;";
+
+    private HashSet<Issue> checkQuestions(HashSet<Issue> issues) {
+        HashSet<Issue> noRepeatIssues = new HashSet<>();
+
+        try(Connection connection = ConnectionPool.getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SQL_FIND_ISSUE_BY_QUESTION);
+            for(Issue issue : issues) {
+                ps.setString(1, issue.getQuestion());
+
+                ResultSet resultSet = ps.executeQuery();
+                if(!resultSet.next()) {
+                    noRepeatIssues.add(issue);
+                }
+            }
+            System.out.println("Repeats: " + (issues.size() - noRepeatIssues.size()));
+            return noRepeatIssues;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return noRepeatIssues;
     }
 }

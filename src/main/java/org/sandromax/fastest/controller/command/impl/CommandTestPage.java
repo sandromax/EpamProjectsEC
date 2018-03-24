@@ -14,8 +14,11 @@ public class CommandTestPage implements Command {
         String page = Pages.TEST_PAGE;
         System.out.println("test page");
 
-        RequestInfo.show(request);
+//        RequestInfo.show(request);
         request.setAttribute("title", request.getParameter("title"));
+        String theme = request.getParameter("theme");
+
+
 
         return page;
     }

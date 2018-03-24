@@ -25,7 +25,7 @@ public class CommandSubjectsCatalog implements Command {
             System.out.println("(id)" + s.getId() + "(name)" + s.getName() + "(lang)" +s.getLang());
         }
 
-        request.setAttribute("title", "Subjects");
+        request.setAttribute("title", "Предметы");
         request.setAttribute("list", subjects);
 
         return page;

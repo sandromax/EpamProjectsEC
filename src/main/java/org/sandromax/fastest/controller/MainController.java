@@ -67,7 +67,7 @@ public class MainController extends HttpServlet {
 //---------------Testing DAO
 //        System.out.println("LIST: ");
 //        for(Student student : students) {
-//            System.out.println("(id)" + student.getId() + " (name)" + student.getName() + " (email)" +student.getEmail());
+//            System.out.println("(id)" + student.getIdInDb() + " (name)" + student.getName() + " (email)" +student.getEmail());
 //        }
 
 //        req.setAttribute("studentFirst", students.get(1).getName());
@@ -78,7 +78,7 @@ public class MainController extends HttpServlet {
 //        List<Subject> subjects = testDao.getAllSubjects();
 //
 //        for(Subject s : subjects) {
-//            System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
+//            System.out.println("(id)" + s.getIdInDb() + " (name)" + s.getName() + " (lang)" +s.getLang());
 //        }
 //
 //        req.setAttribute("list", subjects);
