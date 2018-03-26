@@ -13,16 +13,11 @@ import java.util.Locale;
 
 public class TestDao {
 
-    private static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
-    private static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, subjects.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
-
     //  (SELECT id FROM subjects WHERE name = ? )
     //  (SELECT id FROM themes WHERE name = ?)
 
-    /**
-     * analog - getAll
-     * @return list  of all signed student
-     */
+    private static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
+
     public List<Subject> getAllSubjects() {
         List<Subject> subjects = new LinkedList<>();
         String name, lang;
@@ -52,6 +47,9 @@ public class TestDao {
 
         return new LinkedList<>();
     }
+
+
+    private static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, subjects.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
 
     public List<Theme> getThemesBySubjectName(String subjectName) {
         int themesId, subjectId = 0;
@@ -107,31 +105,30 @@ public class TestDao {
 
     }
 
+
     private static final String  SQL_INSERT_ISSUE = "INSERT INTO issues(theme_id, question, pos_answer_1, pos_answer_2, pos_answer_3, pos_answer_4, right_answer)VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_SELECT_ID_FROM_THEMES = "SELECT id FROM themes WHERE name = ?;";
 
     public boolean insertIssues(HashSet<Issue> issuesHashSet) {
+
         boolean result = false;
-        int counter = 0;
+        ResultSet resultSet = null;
 
         try (Connection connection = ConnectionPool.getConnection();
                 Connection additionalConnection = ConnectionPool.getConnection();
                 PreparedStatement statementAdditional = additionalConnection.prepareStatement(SQL_SELECT_ID_FROM_THEMES);
                 PreparedStatement statement = connection.prepareStatement(SQL_INSERT_ISSUE)) {
 
-//            PreparedStatement statementAdditional = additionalConnection.prepareStatement(SQL_SELECT_ID_FROM_THEMES);
-
-            ResultSet resultSet;
-            int themeId = 0;
             String themeName = issuesHashSet.iterator().next().getTheme().getName();
             statementAdditional.setString(1, themeName);
             resultSet = statementAdditional.executeQuery();
+            
+            int themeId = 0;
             while (resultSet.next()){
                 themeId = resultSet.getInt(1);
             }
 
-//            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_ISSUE);
-
+            int counter = 0;
             for (Issue issue : issuesHashSet) {
                 statement.setInt(1, themeId);
                 statement.setString(2, issue.getQuestion());
@@ -149,16 +146,29 @@ public class TestDao {
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         return result;
     }
+
 
     private static final String SQL_FIND_THEME_BY_NAME = "SELECT * FROM themes WHERE name = ?";
 
     private boolean isNewTheme(String theme) {
-        try(Connection connection = ConnectionPool.getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(SQL_FIND_THEME_BY_NAME);
+
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement ps = connection.prepareStatement(SQL_FIND_THEME_BY_NAME)) {
+
             ps.setString(1, theme);
+
             if(ps.execute())
                 return false;
             else
@@ -167,18 +177,20 @@ public class TestDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
+
 
     private static final String SQL_INSERT_NEW_SUBJECT = "INSERT INTO subjects(name, lang) VALUES(?, ?);";
     private static final String SQL_INSERT_NEW_THEME = "INSERT INTO themes(name, subject_id) VALUES(?, ?);";
 
     private boolean addNewTheme(Theme theme, Subject subject) {
-        try(Connection conSubject = ConnectionPool.getConnection();
-            Connection conTheme = ConnectionPool.getConnection()) {
 
+        try(Connection conSubject = ConnectionPool.getConnection();
+            Connection conTheme = ConnectionPool.getConnection();
             PreparedStatement psSubject = conSubject.prepareStatement(SQL_INSERT_NEW_SUBJECT);
-            PreparedStatement psTheme = conTheme.prepareStatement(SQL_INSERT_NEW_THEME);
+            PreparedStatement psTheme = conTheme.prepareStatement(SQL_INSERT_NEW_THEME)) {
 
             psSubject.setString(1, subject.getName());
             psSubject.setString(2, subject.getLang().getLanguage());
@@ -195,12 +207,13 @@ public class TestDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
 
-    private static final String SQL_FIND_THEME = "SELECT * FROM themes WHERE name = ?;";
 
     private void checkTheme(Issue issue) {
+
         if(isNewTheme(issue.getTheme().getName())) {
             Subject newSubject = issue.getTheme().getSubject();
             Theme newTheme = issue.getTheme();
@@ -214,10 +227,13 @@ public class TestDao {
             System.out.println("Theme: " + issue.getTheme() + " is not new.");
     }
 
-    public static final String SQL_FIND_ISSUE_BY_QUESTION = "SELECT * FROM issues WHERE question = ?;";
+
+    private static final String SQL_FIND_ISSUE_BY_QUESTION = "SELECT * FROM issues WHERE question = ?;";
 
     private HashSet<Issue> checkQuestions(HashSet<Issue> issues) {
+
         HashSet<Issue> noRepeatIssues = new HashSet<>();
+        ResultSet resultSet = null;
 
         try(Connection connection = ConnectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQL_FIND_ISSUE_BY_QUESTION)) {
@@ -225,22 +241,36 @@ public class TestDao {
             for(Issue issue : issues) {
                 statement.setString(1, issue.getQuestion());
 
-                ResultSet resultSet = statement.executeQuery();
+                resultSet = statement.executeQuery();
                 if(!resultSet.next()) {
                     noRepeatIssues.add(issue);
                 }
             }
             System.out.println("Repeats: " + (issues.size() - noRepeatIssues.size()));
+
             return noRepeatIssues;
+
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
         return noRepeatIssues;
     }
 
+
     private static final String SQL_SELECT_ID_THEMES_BY_NAME = "SELECT id FROM themes WHERE name = ?;";
     private static final String SQL_SELECT_ALL_ISSUES_BY_THEME = "SELECT * FROM issues WHERE theme_id = ?;";
+
     public HashSet<Issue> getIssuesByTheme(String themeName) {
+
         HashSet<Issue> findedIssues = new HashSet<>();
 
         return findedIssues;
