@@ -46,14 +46,14 @@ public class TestLoader {
 
         for(String str : rows) {
             if(rowCounter == 87) {
-                langName = str;
+                langName = str.trim();
                 rowCounter++;
             } else if(rowCounter == 88) {
-                subjectName = str;
+                subjectName = str.trim();
                 rowCounter++;
             }
             else if(rowCounter == 89) {
-                themeName = str;
+                themeName = str.trim();
                 rowCounter++;
             }
             else if(rowCounter == 90) {
@@ -61,7 +61,7 @@ public class TestLoader {
                 continue;
             }
             else if(rowCounter == 1) {
-                question = str;
+                question = str.trim();
                 rowCounter++;
             }
             else if(rowCounter == 2) {
@@ -69,19 +69,19 @@ public class TestLoader {
                 continue;
             }
             else if(rowCounter == 3) {
-                answers.add(str);
+                answers.add(str.trim());
                 rowCounter++;
             }
             else if(rowCounter == 4) {
-                answers.add(str);
+                answers.add(str.trim());
                 rowCounter++;
             }
             else if(rowCounter == 5) {
-                answers.add(str);
+                answers.add(str.trim());
                 rowCounter++;
             }
             else if(rowCounter == 6) {
-                answers.add(str);
+                answers.add(str.trim());
                 rowCounter++;
             }
             else if(rowCounter == 7) {
@@ -89,7 +89,7 @@ public class TestLoader {
                 continue;
             }
             else if(rowCounter == 8) {
-                rightAnswer = str;
+                rightAnswer = str.trim();
                 subject = new Subject(subjectName, new Locale(langName));
                 theme = new Theme(themeName, subject);
                 issues.add(new Issue(theme, question, rightAnswer, answers));
