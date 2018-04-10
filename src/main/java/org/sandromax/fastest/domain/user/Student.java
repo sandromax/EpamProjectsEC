@@ -1,27 +1,27 @@
 package org.sandromax.fastest.domain.user;
 
 public class Student {
-    private int id;
+    private int idInDb;
     private String name;
     private String surname;
     private String email;
 
     public Student() {
-        id = 0;
+        idInDb = 0;
         name = "";
         surname = "";
         email = "";
     }
 
-    public Student(int id, String name, String surname, String email) {
-        this.id = id;
+    public Student(int idInDb, String name, String surname, String email) {
+        this.idInDb = idInDb;
         this.name = name;
         this.surname = name;
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public int getIdInDb() {
+        return idInDb;
     }
 
     public String getName() {
@@ -36,8 +36,8 @@ public class Student {
         return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdInDb(int idInDb) {
+        this.idInDb = idInDb;
     }
 
     public void setName(String name) {
