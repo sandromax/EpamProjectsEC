@@ -14,6 +14,12 @@ public class Theme {
         this.subject = subject;
     }
 
+    public Theme(int idInDb, String name, Subject subject) {
+        this.idInDb = idInDb;
+        this.name = name;
+        this.subject = subject;
+    }
+
     public int getIdInDb() {
         return idInDb;
     }
