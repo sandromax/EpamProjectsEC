@@ -3,13 +3,13 @@ package org.sandromax.fastest.model.dao.imp;
 import org.sandromax.fastest.domain.test.Issue;
 import org.sandromax.fastest.domain.test.Subject;
 import org.sandromax.fastest.domain.test.Theme;
+import org.sandromax.fastest.domain.testing.IssueDone;
+import org.sandromax.fastest.domain.testing.TestResult;
+import org.sandromax.fastest.domain.user.Student;
 import org.sandromax.fastest.model.dao.connection.impl.ConnectionPool;
 
 import java.sql.*;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class TestDao {
 
@@ -109,7 +109,7 @@ public class TestDao {
     private static final String  SQL_INSERT_ISSUE = "INSERT INTO issues(theme_id, question, pos_answer_1, pos_answer_2, pos_answer_3, pos_answer_4, right_answer)VALUES(?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_SELECT_ID_FROM_THEMES = "SELECT id FROM themes WHERE name = ?;";
 
-    public boolean insertIssues(HashSet<Issue> issuesHashSet) {
+    private boolean insertIssues(HashSet<Issue> issuesHashSet) {
 
         boolean result = false;
         ResultSet resultSet = null;
@@ -122,7 +122,7 @@ public class TestDao {
             String themeName = issuesHashSet.iterator().next().getTheme().getName();
             statementAdditional.setString(1, themeName);
             resultSet = statementAdditional.executeQuery();
-            
+
             int themeId = 0;
             while (resultSet.next()){
                 themeId = resultSet.getInt(1);
@@ -269,10 +269,222 @@ public class TestDao {
     private static final String SQL_SELECT_ID_THEMES_BY_NAME = "SELECT id FROM themes WHERE name = ?;";
     private static final String SQL_SELECT_ALL_ISSUES_BY_THEME = "SELECT * FROM issues WHERE theme_id = ?;";
 
-    public HashSet<Issue> getIssuesByTheme(String themeName) {
+    public static LinkedHashSet<Issue> getIssuesByTheme(Theme theme) {
 
-        HashSet<Issue> findedIssues = new HashSet<>();
+        LinkedHashSet<Issue> findedIssues = new LinkedHashSet<>();
+        ResultSet serviceResultSet = null;
+        ResultSet resultSet = null;
+
+        try(Connection serviceConnection = ConnectionPool.getConnection();
+            Connection connection = ConnectionPool.getConnection();
+            PreparedStatement serviceStatement = serviceConnection.prepareStatement(SQL_SELECT_ID_THEMES_BY_NAME);
+            PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ALL_ISSUES_BY_THEME)) {
+
+            serviceStatement.setString(1, theme.getName());
+            serviceResultSet = serviceStatement.executeQuery();
+            int themeId = 0;
+            while (serviceResultSet.next()) {
+                themeId = serviceResultSet.getInt(1);
+            }
+
+            if(themeId == 0) {
+                System.out.println("Error! Theme wasn't found.");
+                return findedIssues;
+            } else {
+                statement.setString(1, "" + themeId);
+                resultSet = statement.executeQuery();
+
+                int id;
+                String question, rightAnswer;
+                LinkedList<String> variantAnswers = new LinkedList<>();
+                while (resultSet.next()) {
+                    id = resultSet.getInt("id");
+                    question = resultSet.getString("question");
+                    rightAnswer = resultSet.getString("right_answer");
+                    variantAnswers.add(resultSet.getString(4));
+                    variantAnswers.add(resultSet.getString(5));
+                    variantAnswers.add(resultSet.getString(6));
+                    variantAnswers.add(resultSet.getString(7));
+
+                    theme.setIdInDb(themeId);
+
+                    Issue issue = new Issue(id, theme, question, rightAnswer, variantAnswers);
+                    findedIssues.add(issue);
+
+                    System.out.println("finded in DB " + findedIssues.size() + " issues.");
+                }
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         return findedIssues;
+    }
+
+    private static final String SQL_SELECT_ID_STUDENT_BY_NAME = "SELECT id FROM students WHERE name = ?;";
+    private static final String SQL_INSERT_TEST_RESULT = "INSERT INTO test_results(theme_id, student_id, date_time, issue_dones_ids, rate) VALUES(?, ?, ?, ?, ?)";
+    public static boolean insertTestResult(TestResult testResult) {
+
+        //Getting id of theme if it absent
+        Theme theme = testResult.getTheme();
+        if(theme.getIdInDb() == 0) {
+            ResultSet resultSet = null;
+            try(Connection connection = ConnectionPool.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ID_THEMES_BY_NAME)) {
+
+                statement.setString(1, theme.getName());
+
+                resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    theme.setIdInDb(resultSet.getInt(1));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                if(resultSet != null) {
+                    try {
+                        resultSet.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        //Getting id of student if it absent
+        Student student = testResult.getStudent();
+        if(student.getIdInDb() == 0) {
+            ResultSet resultSet = null;
+            try(Connection connection = ConnectionPool.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ID_STUDENT_BY_NAME)) {
+
+                statement.setString(1, student.getName());
+
+                resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    student.setIdInDb(resultSet.getInt(1));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                if(resultSet != null) {
+                    try {
+                        resultSet.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        //  Getting id of issueDone if it absent
+        List<IssueDone> issueDones = testResult.getIssueDones();
+        checkingForEmptyIssueDoneId(issueDones);
+
+        String issueDoneIds = testResult.getIssueDonesDbFormat();
+
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TEST_RESULT)) {
+
+            statement.setInt(1, theme.getIdInDb());
+            statement.setInt(2, student.getIdInDb());
+            statement.setString(3, testResult.getTimeMoment().toString());
+            statement.setString(4, issueDoneIds);
+            statement.setDouble(5, testResult.getRate());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    /**
+     * Method check list of IssueDone by idInDb field
+     * If field is empty than called 'setIssueDoneId' method
+     * @param issueDones
+     */
+    private static void checkingForEmptyIssueDoneId(List<IssueDone> issueDones) {
+        for(IssueDone issueDone : issueDones) {
+            if(issueDone.getIdInDb() == 0)
+                setIssueDoneId(issueDone);
+        }
+    }
+
+    /**
+     * Method set id it to the field
+     * @param issueDone
+     */
+    private static void setIssueDoneId(IssueDone issueDone) {
+        int issueId = issueDone.getIssue().getIdInDb();
+        int studentId = issueDone.getStudent().getIdInDb();
+        String date = issueDone.getDate().toString();
+
+        int issueDoneId = getIdOfIssueDoneByIssueIdAndStudentIdAndDate(issueId, studentId, date);
+        issueDone.setIdInDb(issueDoneId);
+    }
+
+    private static final String SQL_SELECT_ISSUEDONE_ID_BY_ISSUE_ID_STUDENT_ID_DATE = "SELECT id FROM issue_dones WHERE issue_id = ? AND student_id = ? AND issue_dones.date = ?;\n";
+    private static int getIdOfIssueDoneByIssueIdAndStudentIdAndDate(int issueId, int studentId, String date) {
+        ResultSet resultSet = null;
+        int result = 0;
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_SELECT_ISSUEDONE_ID_BY_ISSUE_ID_STUDENT_ID_DATE)) {
+
+            statement.setInt(1, issueId);
+            statement.setInt(2, studentId);
+            statement.setString(3, date);
+
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static String joinForDb(List<String> list) {
+
+        StringJoiner joiner = new StringJoiner("^");
+
+        for(String str : list) {
+            joiner.add(str.toString());
+        }
+
+        String result = joiner.toString();
+
+        return result;
+    }
+
+    private static String[] splitFromDb(String string) {
+        String[] splited = string.split("\\^");
+
+        return splited;
     }
 }
