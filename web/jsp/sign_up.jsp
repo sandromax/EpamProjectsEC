@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/sign_up.css">
 	<meta charset="UTF-8">
-	<title>Регистрация</title>
+	<title>Registration</title>
 </head>
 <body>
 	<a href="../index.jsp" class="logo"></a>

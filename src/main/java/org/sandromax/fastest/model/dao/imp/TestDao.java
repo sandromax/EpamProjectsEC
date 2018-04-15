@@ -18,7 +18,7 @@ public class TestDao {
 
     private static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
 
-    public List<Subject> getAllSubjects() {
+    public static List<Subject> getAllSubjects() {
         List<Subject> subjects = new LinkedList<>();
         String name, lang;
         int id;
@@ -51,7 +51,7 @@ public class TestDao {
 
     private static final String SQL_SELECT_THEMES_BY_SUBJECT_NAME = "SELECT themes.id, themes.name, subjects.id, subjects.name, subjects.lang FROM themes JOIN subjects ON themes.subject_id = subjects.id WHERE subjects.name = ?";
 
-    public List<Theme> getThemesBySubjectName(String subjectName) {
+    public static List<Theme> getThemesBySubjectName(String subjectName) {
         int themesId, subjectId = 0;
         String name, lang = "";
         List<Theme> themes = new LinkedList<>();
@@ -298,6 +298,8 @@ public class TestDao {
                 String question, rightAnswer;
                 LinkedList<String> variantAnswers = new LinkedList<>();
                 while (resultSet.next()) {
+                    variantAnswers = new LinkedList<>();
+
                     id = resultSet.getInt("id");
                     question = resultSet.getString("question");
                     rightAnswer = resultSet.getString("right_answer");
@@ -337,6 +339,39 @@ public class TestDao {
 
         //Getting id of theme if it absent
         Theme theme = testResult.getTheme();
+        checkingForEmptyThemeId(theme);
+
+
+        //Getting id of student if it absent
+        Student student = testResult.getStudent();
+        checkingForEmptyStudentId(student);
+
+
+        //  Getting id of issueDone if it absent
+        List<IssueDone> issueDones = testResult.getIssueDones();
+        checkingForEmptyIssueDoneId(issueDones);
+
+        String issueDoneIds = testResult.getIssueDonesDbFormat();
+
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TEST_RESULT)) {
+
+            statement.setInt(1, theme.getIdInDb());
+            statement.setInt(2, student.getIdInDb());
+            statement.setString(3, testResult.getTimeMoment().toString());
+            statement.setString(4, issueDoneIds);
+            statement.setDouble(5, testResult.getRate());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    private static void checkingForEmptyThemeId(Theme theme) {
         if(theme.getIdInDb() == 0) {
             ResultSet resultSet = null;
             try(Connection connection = ConnectionPool.getConnection();
@@ -361,9 +396,9 @@ public class TestDao {
                 }
             }
         }
+    }
 
-        //Getting id of student if it absent
-        Student student = testResult.getStudent();
+    private static void checkingForEmptyStudentId(Student student) {
         if(student.getIdInDb() == 0) {
             ResultSet resultSet = null;
             try(Connection connection = ConnectionPool.getConnection();
@@ -388,29 +423,6 @@ public class TestDao {
                 }
             }
         }
-
-        //  Getting id of issueDone if it absent
-        List<IssueDone> issueDones = testResult.getIssueDones();
-        checkingForEmptyIssueDoneId(issueDones);
-
-        String issueDoneIds = testResult.getIssueDonesDbFormat();
-
-        try(Connection connection = ConnectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_TEST_RESULT)) {
-
-            statement.setInt(1, theme.getIdInDb());
-            statement.setInt(2, student.getIdInDb());
-            statement.setString(3, testResult.getTimeMoment().toString());
-            statement.setString(4, issueDoneIds);
-            statement.setDouble(5, testResult.getRate());
-
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return true;
     }
 
     /**
@@ -486,5 +498,65 @@ public class TestDao {
         String[] splited = string.split("\\^");
 
         return splited;
+    }
+
+    private static final String SQL_INSERT_ISSUEDONE = "INSERT INTO issue_dones(issue_id, answer, is_positive, student_id, date) VALUES(?, ?, ?, ?, ?);";
+    public static boolean insertIssueDone(IssueDone issueDone) {
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_ISSUEDONE)) {
+            int issueId = issueDone.getIssue().getIdInDb();
+            String answer = issueDone.getAnswer();
+            boolean isPositive = issueDone.getPositive();
+            Student student = issueDone.getStudent();
+            checkingForEmptyStudentId(student);
+            int studentId = student.getIdInDb();
+            String date = issueDone.getDate().toString();
+
+            statement.setInt(1, issueId);
+            statement.setString(2, answer);
+            statement.setBoolean(3, isPositive);
+            statement.setInt(4, studentId);
+            statement.setString(5, date);
+
+            statement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean insertIssueDones(List<IssueDone> issueDones) {
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_ISSUEDONE)) {
+            int issueId;
+            String answer;
+            boolean isPositive;
+            Student student;
+            int studentId;
+            String date;
+
+            for(IssueDone issueDone : issueDones) {
+                issueId = issueDone.getIssue().getIdInDb();
+                answer = issueDone.getAnswer();
+                isPositive = issueDone.getPositive();
+                student = issueDone.getStudent();
+                checkingForEmptyStudentId(student);
+                studentId = student.getIdInDb();
+                date = issueDone.getDate().toString();
+
+                statement.setInt(1, issueId);
+                statement.setString(2, answer);
+                statement.setBoolean(3, isPositive);
+                statement.setInt(4, studentId);
+                statement.setString(5, date);
+
+                statement.execute();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

@@ -4,9 +4,9 @@
     <title>arrow_header</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Nav-Bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1856.000000, -31.000000)">
-        <g id="arrow_header" transform="translate(1860.000000, 37.000000) rotate(-90.000000) translate(-1860.000000, -37.000000) translate(1854.000000, 33.000000)" fill="#000000" fill-rule="nonzero">
-            <polygon id="Shape" points="12 0 6 8 0 0"></polygon>
+    <g idInDb="Nav-Bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1856.000000, -31.000000)">
+        <g idInDb="arrow_header" transform="translate(1860.000000, 37.000000) rotate(-90.000000) translate(-1860.000000, -37.000000) translate(1854.000000, 33.000000)" fill="#000000" fill-rule="nonzero">
+            <polygon idInDb="Shape" points="12 0 6 8 0 0"></polygon>
         </g>
     </g>
 </svg>

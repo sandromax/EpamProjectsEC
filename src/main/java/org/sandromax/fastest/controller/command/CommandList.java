@@ -17,6 +17,7 @@ public enum CommandList {
     SUBJECTS_CATALOG(new CommandSubjectsCatalog()),
     THEMES_CATALOG(new CommandThemesCatalog()),
     TEST_PAGE(new CommandTestPage()),
+    NEXT_QUESTION(new CommandNextQuestion()),
     TEST_RESULT_PAGE(new CommandTestResultPage()),
     ADMIN_PAGE(new CommandAdminPage()),
     GET_TESTS_FROM_FILE(new CommandGetTestsFromFile()),

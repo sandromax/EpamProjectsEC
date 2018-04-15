@@ -14,33 +14,36 @@ import java.util.List;
 public class CommandSignIn implements Command {
     @Override
     public String execute(HttpServletRequest request) {
-        String page = Pages.SIGN_IN_PAGE;
+        String page;    // = Pages.SIGN_IN_PAGE;
+
+        sessionLogOut(request);
 
         String emailParam = request.getParameter("email");
         String passParam = request.getParameter("password");
-        System.out.println("CommandSignIn output\nemail: " + emailParam + ", " + "password: " + passParam);
+//        System.out.println("CommandSignIn output\nemail: " + emailParam + ", " + "password: " + passParam);
 
         String passDb = UserDao.getPassByEmail(emailParam);
-        System.out.println("passDb: " + passDb);
+//        System.out.println("passDb: " + passDb.isEmpty());
+        String nameDb = UserDao.getNameByEmail(emailParam);
+
 
         HttpSession session = request.getSession();
 
-        System.out.println("check: " + BCrypt.checkpw(passParam, passDb));
+//        System.out.println("check: " + BCrypt.checkpw(passParam, passDb));
 
-        String name = UserDao.getNameByEmail(emailParam);
 
+//        boolean isValid = BCrypt.checkpw(passParam, passDb);
         if(passDb.length() != 0 && (BCrypt.checkpw(passParam, passDb))) {
 
-            session.setAttribute("user_name", name);
+            session.setAttribute("user_name", nameDb);
 
-            TestDao testDao = new TestDao();
-            List<Subject> subjects = testDao.getAllSubjects();
+            List<Subject> subjects = TestDao.getAllSubjects();
 
-            System.out.println("Subjects:");
-            for(Subject s : subjects) {
-                System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
-            }
-
+//            System.out.println("Subjects:");
+//            for(Subject s : subjects) {
+//                System.out.println("(id)" + s.getId() + " (name)" + s.getName() + " (lang)" +s.getLang());
+//            }
+//          Note: Code repeating (CommandSubjectsCatalog.java:18-23)
             request.setAttribute("title", "Subjects");
             session.setAttribute("list", subjects);
 
@@ -51,5 +54,12 @@ public class CommandSignIn implements Command {
         }
 
         return page;
+    }
+
+    private void sessionLogOut(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
     }
 }

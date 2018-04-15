@@ -14,7 +14,6 @@ public class TestProvider {
     private LinkedList<Issue> issues = new LinkedList<>();
     //  тестований студент
     private Student student;
-
     //  результат проходження даного тесту
     private TestResult testResult;
 
@@ -26,20 +25,23 @@ public class TestProvider {
     private int estimateSeconds = 900;
     //  екземпляр поточного питання
     private Issue currentIssue;
-
     //  відповідь
     private String answer;
+    //  флаг про закінчення
+    private Boolean isEnd;
+
+    public TestProvider() {
+    }
 
     public Issue getCurrentIssue() {
         return currentIssue;
     }
 
     /**
-     *  Notice student,
-     *  download issues to variable currentIssue,
-     *  preparing list of issues,
-     *  initialize TestResult class
-     *
+     * Notice student,
+     * download issues to variable currentIssue,
+     * preparing list of issues,
+     * initialize TestResult class
      */
     public void init(Student student, Theme theme, int issueCapacity) {
         this.student = student;
@@ -66,28 +68,43 @@ public class TestProvider {
 
     /**
      * Switch to the next issue
+     *
      * @param answer answer to the previous issue
      */
-    public void next(String answer) {
-        if(currentIssueIndex < issues.size()) {
-            IssueDone issueDone = new IssueDone(currentIssue, answer, student);
-            issueDone.evaluateIssue();
+    public boolean next(String answer) {
+        IssueDone issueDone = new IssueDone(currentIssue, answer, student);
+        issueDone.evaluateIssue();      //Exception
+//            java.lang.NullPointerException
+//            org.sandromax.fastest.domain.testing.IssueDone.evaluateIssue(IssueDone.java:79)
+//            org.sandromax.fastest.domain.testing.TestProvider.next(TestProvider.java:77)
+//            org.sandromax.fastest.controller.command.impl.CommandNextQuestion.execute(CommandNextQuestion.java:35)
 
-            testResult.addIssueDone(issueDone);
+        testResult.addIssueDone(issueDone);
 
-            currentIssueIndex++;
+        currentIssueIndex++;
+        if (currentIssueIndex == 4)
+            System.out.println(currentIssueIndex);
+
+        if (currentIssueIndex < issues.size()) {
             currentIssue = issues.get(currentIssueIndex);
+
+            return true;
         } else
-            end();
+            return false;
     }
 
     /**
      * End of the testing
      */
-    private void end() {
+    public void end() {
         testResult.evaluateIssues();
+        System.out.println(testResult.getIssueDones().size() + " - size of issueDones");
+        System.out.println(numberOfIssues + " - size of issueDones");
 
+        TestDao.insertIssueDones(testResult.getIssueDones());
         TestDao.insertTestResult(testResult);
+
+        isEnd = true;
     }
 
     /**
@@ -95,7 +112,7 @@ public class TestProvider {
      * To shuffle collection
      *
      * @param issues
-     * @return  shuffled collection
+     * @return shuffled collection
      */
     public void shuffle(LinkedList<Issue> issues) {
         LinkedList<Issue> newList = new LinkedList<>();
@@ -121,10 +138,37 @@ public class TestProvider {
      */
     public void cut(LinkedList<Issue> issues, int capacity) {
         while (issues.size() != capacity)
-            issues.removeLast();
+            issues.removeLast();    //java.util.NoSuchElementException
     }
 
     private void timerStart() {
         System.out.println("timerStart");
+    }
+
+    /**
+     * Getters
+     */
+    public Student getStudent() {
+        return student;
+    }
+
+    public int getNumberOfIssues() {
+        return numberOfIssues;
+    }
+
+    public int getCurrentIssueIndex() {
+        return currentIssueIndex;
+    }
+
+    public int getEstimateSeconds() {
+        return estimateSeconds;
+    }
+
+    public Boolean getEnd() {
+        return isEnd;
+    }
+
+    public TestResult getTestResult() {
+        return testResult;
     }
 }

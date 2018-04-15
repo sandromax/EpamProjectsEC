@@ -11,6 +11,9 @@
     <title>Test Result</title>
 </head>
 <body>
+<%--<jsp:include page="header.jsp" flush="true"></jsp:include>--%>
+
+Result of testing: ${test_rate}
 
 </body>
 </html>

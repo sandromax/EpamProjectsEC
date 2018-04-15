@@ -34,7 +34,7 @@ public class MainController extends HttpServlet {
 
     private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //  UTF-8 problem fix
-//        System.out.println("inside servled encoding req: "+req.getCharacterEncoding());
+//        System.out.println("inside servlet encoding req: "+req.getCharacterEncoding());
         if(encoding != null) {
             System.out.println("encoding is null. UTF-8 fixing ...");
             req.setCharacterEncoding(encoding);
@@ -47,7 +47,6 @@ public class MainController extends HttpServlet {
 
         if(page != null) {
             req.getRequestDispatcher(page).forward(req, resp);
-
         }
 //        String param = req.getParameter("punct");
 //        req.setAttribute("punctP", param);

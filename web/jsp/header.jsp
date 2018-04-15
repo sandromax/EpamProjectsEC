@@ -15,8 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/catalog.css">
     <meta charset="UTF-8">
-    <title>Каталог тестов</title>
-    <title>Title</title>
+    <title>${title}</title>
 </head>
 <body>
 <header>

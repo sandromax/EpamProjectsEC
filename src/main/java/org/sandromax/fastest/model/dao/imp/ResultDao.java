@@ -1,7 +1,5 @@
 package org.sandromax.fastest.model.dao.imp;
 
-import org.sandromax.fastest.domain.result.Success;
-import org.sandromax.fastest.domain.result.TestHistory;
 import org.sandromax.fastest.domain.user.Student;
 import org.sandromax.fastest.model.dao.connection.impl.ConnectionPool;
 
@@ -57,37 +55,37 @@ public class ResultDao {
         return date;
     }
 
-    TestHistory getHistoryByStudentAndTheme(int studentId, int themeId) {
-        return new TestHistory();
-    }
+//    TestHistory getHistoryByStudentAndTheme(int studentId, int themeId) {
+//        return new TestHistory();
+//    }
 
-    List<Success> getSuccessByStudent(int studentId) {
-        PreparedStatement preparedStatement = null;
-        LocalDate date = null;
-        Date dateSQL = null;
-        Success success = new Success();
-        List <Success> successes = new LinkedList<>();
+//    List<Success> getSuccessByStudent(int studentId) {
+//        PreparedStatement preparedStatement = null;
+//        LocalDate date = null;
+//        Date dateSQL = null;
+//        Success success = new Success();
+//        List <Success> successes = new LinkedList<>();
+//
+//        try (Connection connection = ConnectionPool.getConnection()) {
+//            connection.prepareStatement(SQL_SELECT_SUCCESS_BY_STUDENT);
+//
+//            preparedStatement.setInt(1, studentId);
+//
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            while (resultSet.next()) {
+//
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return successes;
+//    }
 
-        try (Connection connection = ConnectionPool.getConnection()) {
-            connection.prepareStatement(SQL_SELECT_SUCCESS_BY_STUDENT);
 
-            preparedStatement.setInt(1, studentId);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return successes;
-    }
-
-
-    boolean setSuccessOfStudent(Student student, Success success) {
-        return true;
-    }
+//    boolean setSuccessOfStudent(Student student, Success success) {
+//        return true;
+//    }
 
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../css/reset.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/catalog.css">
-    <title>Subjects</title>
+    <title>${title}</title>
 </head>
 <body>
     <jsp:include page="header.jsp" flush="true"></jsp:include>

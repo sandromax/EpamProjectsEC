@@ -44,6 +44,7 @@ public class TestResult {
         }
 
         rate = positiveAnswers;
+        isRated = true;
     }
 
     public LinkedList<IssueDone> getIssueDones() {

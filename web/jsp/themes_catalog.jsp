@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 	<link rel="stylesheet" type="text/css" href="../css/catalog.css">
 	<meta charset="UTF-8">
-	<title>Каталог тестов</title>
+	<title>${title}</title>
 </head>
 <body>
     <jsp:include page="header.jsp" flush="true"></jsp:include>
@@ -22,7 +22,7 @@
                     <div class="card_catalog">
                         <p class="card_title return"><c:out value="${item.getName()}" /></p>
                         <div class="triangle"></div>
-                        <a href ="/controller?command=test_page&theme=${item.getName()}&title=Тест: ${subject} ${item.getName()}" class="btn_card">Пройти тест</a>
+                        <a href ="/controller?command=test_page&theme=${item.getName()}&title=Тест: ${subject} ${item.getName()}&subject=${subject}" class="btn_card">Пройти тест</a>
                     </div>
                 </c:forEach>
 

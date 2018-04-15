@@ -9,13 +9,11 @@ import java.util.List;
 
 public class UserDao {
 
-    public static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, email, pass) VALUES(?, ?, ?)";
-    public static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM students";
-    public static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = ?";
-    public static final String SQL_SELECT_PASS_BY_EMAIL = "SELECT pass FROM students WHERE email = ?";
-    public static final String SQL_SELECT_NAME_BY_EMAIL = "SELECT name FROM students WHERE email = ?";
-
-
+    private static final String SQL_INSERT_STUDENT = "INSERT INTO students(name, email, pass) VALUES(?, ?, ?)";
+    private static final String SQL_SELECT_ALL_STUDENTS = "SELECT * FROM students";
+    private static final String SQL_SELECT_STUDENTS_EMAIL_BY_PASS = "SELECT email FROM students WHERE pass = ?";
+    private static final String SQL_SELECT_PASS_BY_EMAIL = "SELECT pass FROM students WHERE email = ?";
+    private static final String SQL_SELECT_NAME_BY_EMAIL = "SELECT name FROM students WHERE email = ?";
 
     //  OK
     public static boolean addStudent(String name, String email, String pass) {
@@ -99,7 +97,7 @@ public class UserDao {
                 surname = resultSet.getString(3);
                 email = resultSet.getString("email");
 
-                Student student = new Student(id, name, surname, email);
+                Student student = new Student(id, name, email);
 
                 resultList.add(student);
             }
@@ -136,5 +134,29 @@ public class UserDao {
         }
 
         return email;
+    }
+
+    private static final String SQL_FIND_STUDENT_BY_NAME = "SELECT id, name, email FROM students WHERE name = ?;";
+    public static Student findStudentByName(String studentName) {
+        ResultSet resultSet = null;
+        Student student = null;
+
+        try(Connection connection = ConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQL_FIND_STUDENT_BY_NAME)) {
+            statement.setString(1, studentName);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String name = resultSet.getString(2);
+                String email = resultSet.getString(3);
+
+                student = new Student(id, name, email);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return student;
     }
 }

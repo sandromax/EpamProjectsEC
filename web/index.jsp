@@ -34,6 +34,7 @@
 					</form>
 					<hr>
 					<a href="/controller?command=admin_page">Admin Page</a>
+					<a href="/controller?command=test_field">Test Field Page</a>
 				</div>
 			</div>
 		</div>

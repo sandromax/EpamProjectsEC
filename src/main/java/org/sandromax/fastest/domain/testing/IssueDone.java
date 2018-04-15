@@ -76,7 +76,11 @@ public class IssueDone {
     public void evaluateIssue() {
         String right = issue.getRightAnswer();
 
-        if(answer.equals(right))
+        if(answer.equals(right))    //Exception
+//            java.lang.NullPointerException
+//        org.sandromax.fastest.domain.testing.IssueDone.evaluateIssue(IssueDone.java:79)
+//        org.sandromax.fastest.domain.testing.TestProvider.next(TestProvider.java:77)
+//        org.sandromax.fastest.controller.command.impl.CommandNextQuestion.execute(CommandNextQuestion.java:35)
             isPositive = true;
         else
             isPositive = false;
