@@ -15,8 +15,11 @@ public class TestResult {
 
     private LinkedList<IssueDone> issueDones = new LinkedList<>();
 
-    private boolean isRated;
+    private int rights;
+    private int wrongs;
+    private int elapsedTime;
     private double rate;
+    private boolean isRated;
 
     public TestResult() { }
 
@@ -43,7 +46,9 @@ public class TestResult {
             }
         }
 
-        rate = positiveAnswers;
+        rights = positiveAnswers;
+        wrongs = issueDones.size() - positiveAnswers;
+        rate = (100 / issueDones.size()) * positiveAnswers;
         isRated = true;
     }
 
@@ -77,8 +82,10 @@ public class TestResult {
     }
 
     public double getRate() {
-        return rate;
+        if(isRated)
+            return rate;
     }
+
 
 
     private static String joinForDb(List<String> list) {
