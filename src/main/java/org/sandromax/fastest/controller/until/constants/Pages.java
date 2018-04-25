@@ -26,4 +26,6 @@ public interface Pages {
     String ADMIN_PAGE = "jsp/admin_page.jsp";
 
     String TEST_FIELD_PAGE = "jsp/test_field_page.jsp";
+
+    String EMAIL_SENDING = "jsp/EmailForm.jsp";
 }

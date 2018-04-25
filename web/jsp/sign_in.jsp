@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/sign_in.css">
     <meta charset="UTF-8">
-    <title>Fastest</title>
+    <title>Fastest - Sign In</title>
 </head>
 <body>
 <a href="../index.jsp" class="logo"></a>

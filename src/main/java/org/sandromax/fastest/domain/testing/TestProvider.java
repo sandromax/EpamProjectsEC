@@ -10,25 +10,20 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class TestProvider {
-    //  містить набір питань даного тесту
-    private LinkedList<Issue> issues = new LinkedList<>();
-    //  тестований студент
-    private Student student;
-    //  результат проходження даного тесту
-    private TestResult testResult;
+    private LinkedList<Issue> issues = new LinkedList<>();          //  містить набір питань даного тесту
+    private Issue currentIssue;         //  екземпляр поточного питання
 
-    //  всього питань в даному тесті
-    private int numberOfIssues;
-    //  поточне питання
-    private int currentIssueIndex;
-    //  секунд дано на проходження тесту
-    private int estimateSeconds = 900;
-    //  екземпляр поточного питання
-    private Issue currentIssue;
-    //  відповідь
-    private String answer;
-    //  флаг про закінчення
-    private Boolean isEnd;
+    private Student student;            //  тестований студент
+    private TestResult testResult;          //  результат проходження даного тесту
+
+
+    private int numberOfIssues;         //  всього питань в даному тесті
+    private int currentIssueIndex;          //  поточне питання
+    private int estimateSeconds = 900;          //  секунд дано на проходження тесту
+
+    private String answer;          //  відповідь
+    private Boolean isEnd;          //  флаг про закінчення
+
 
     public TestProvider() {
     }

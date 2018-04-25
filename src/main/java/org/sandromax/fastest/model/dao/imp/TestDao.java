@@ -1,5 +1,6 @@
 package org.sandromax.fastest.model.dao.imp;
 
+import org.apache.log4j.Logger;
 import org.sandromax.fastest.domain.test.Issue;
 import org.sandromax.fastest.domain.test.Subject;
 import org.sandromax.fastest.domain.test.Theme;
@@ -19,6 +20,14 @@ public class TestDao {
     private static final String SQL_SELECT_ALL_SUBJECTS = "SELECT * FROM subjects";
 
     public static List<Subject> getAllSubjects() {
+        Logger logger = Logger.getLogger("TestDao");
+//        Logger logger = null;
+//        try {
+//            logger = Logger.getLogger(Class.forName("TestDao"));
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+
         List<Subject> subjects = new LinkedList<>();
         String name, lang;
         int id;
@@ -39,6 +48,13 @@ public class TestDao {
             }
 
             statement.close();
+            logger.fatal("fatal");
+            logger.error("error");
+            logger.warn("warn");
+            logger.info("info: founded subjects: " + subjects.size());
+            logger.debug("debug log");
+            logger.trace("trace");
+
             return subjects;
 
         } catch (SQLException e) {

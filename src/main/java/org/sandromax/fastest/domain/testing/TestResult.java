@@ -84,9 +84,23 @@ public class TestResult {
     public double getRate() {
         if(isRated)
             return rate;
+        else
+            return -1;
     }
 
+    public int getRights() {
+        if(isRated)
+            return rights;
+        else
+            return -1;
+    }
 
+    public int getWrongs()  {
+        if(isRated)
+            return wrongs;
+        else
+            return -1;
+    }
 
     private static String joinForDb(List<String> list) {
 

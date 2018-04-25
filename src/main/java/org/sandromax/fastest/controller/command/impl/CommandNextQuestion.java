@@ -4,6 +4,7 @@ import org.sandromax.fastest.controller.command.Command;
 import org.sandromax.fastest.controller.until.RequestInfo;
 import org.sandromax.fastest.controller.until.SessionInfo;
 import org.sandromax.fastest.controller.until.constants.Pages;
+import org.sandromax.fastest.domain.testing.IssueDone;
 import org.sandromax.fastest.domain.testing.TestProvider;
 import org.sandromax.fastest.domain.testing.TestResult;
 
@@ -56,22 +57,23 @@ public class CommandNextQuestion implements Command {
             testProvider.end();
 
             TestResult testResult = testProvider.getTestResult();
-            System.out.println(testResult + " - testResult object");
-            session.setAttribute("test_result", testResult);
+//            System.out.println(testResult + " - testResult object");
+//            session.setAttribute("test_result", testResult);
 
-            System.out.println(testResult.getRate() + " - testResult rate");
-            session.setAttribute("test_rate", testResult.getRate());
+            LinkedList<IssueDone> issueDones = testProvider.getTestResult().getIssueDones();
+            session.setAttribute("issue_dones", issueDones);
+
+            String title = testResult.getTheme().getSubject().getName() + ": " + testResult.getTheme().getName();
+            session.setAttribute("title_page", title + " - Результаты");
+            session.setAttribute("title", title);
+
+            session.setAttribute("rights", testResult.getRights());
+            session.setAttribute("wrongs", testResult.getWrongs());
+            session.setAttribute("rate", testResult.getRate());
 
             page = Pages.TEST_RESULT;
+
         }
-
-
-//        if(testProvider.getEnd()) {
-//            page = Pages.TEST_RESULT;
-//        }
-//        else {
-//            page = Pages.TEST_PAGE;
-//        }
 
         return page;
     }

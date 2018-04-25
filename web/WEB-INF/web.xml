@@ -11,6 +11,22 @@
         <!--<servlet-name>controller</servlet-name>-->
         <!--<url-pattern>/controller</url-pattern>-->
     <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>Log4jInit</servlet-name>-->
+        <!--<servlet-class>org.sandromax.fastest.controller.Log4jInit</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>logfile</param-name>-->
+            <!--<param-value>WEB-INF/log4j.properties</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Log4jInit</servlet-name>-->
+        <!--<url-pattern>/Log4jInit</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <description>MySQL</description>
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
@@ -21,5 +37,26 @@
     <context-param>
         <param-name>PARAMETER_ENCODING</param-name>
         <param-value>UTF-8</param-value>
+    </context-param>
+
+    <!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>58java@gmail.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>56MAdb_!@#good</param-value>
     </context-param>
 </web-app>

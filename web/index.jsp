@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<meta charset="UTF-8">
-	<title>fastest</title>
+	<title>fastest - سلام لك</title>
 </head>
 <body>
 	<header>
@@ -22,19 +22,22 @@
 				<a href="/controller?command=sign_up_page" class="btn_fill">Зарегистрироваться</a>
 				<a href="/controller?command=sign_in_page" class="btn_border">Войти</a>
 				<div>
+					<br><br><br><br><br><br><br>
 					<hr>
-					<a href="/controller?command=subjects_catalog">Subjects</a>
-					<hr/>
-					<a href="/controller?command=themes_catalog">Themes</a>
+					<%--<a href="/controller?command=subjects_catalog">Subjects</a>--%>
+					<%--<hr/>--%>
+					<%--<a href="/controller?command=themes_catalog">Themes</a>--%>
 					<hr>
-					<form action="controller">
-						<input type="text" name="command" value="themes_catalog">
-						<input type="text" name="subject" value="SQL">
-						<input type="submit" value="THEMES by SQL">
-					</form>
+					<%--<form action="controller">--%>
+						<%--<input type="text" name="command" value="themes_catalog">--%>
+						<%--<input type="text" name="subject" value="SQL">--%>
+						<%--<input type="submit" value="THEMES by SQL">--%>
+					<%--</form>--%>
 					<hr>
-					<a href="/controller?command=admin_page">Admin Page</a>
-					<a href="/controller?command=test_field">Test Field Page</a>
+					<a href="/controller?command=admin_page">I'm Admin</a>
+					<%--<a href="/controller?command=test_field">Test Field Page</a>--%>
+					<hr>
+					<a href="/jsp/EmailForm.jsp">MAIL</a>
 				</div>
 			</div>
 		</div>

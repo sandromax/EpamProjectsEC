@@ -34,6 +34,15 @@ public class IssueDone {
         Date = LocalDate.now();
     }
 
+    public IssueDone(int idInDb, Issue issue, String answer, Boolean isPositive, Student student, LocalDate date) {
+        this.idInDb = idInDb;
+        this.issue = issue;
+        this.answer = answer;
+        this.isPositive = isPositive;
+        this.student = student;
+        Date = date;
+    }
+
     /**
      * Getters
      * @return

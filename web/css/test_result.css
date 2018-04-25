@@ -1,0 +1,48 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    /*padding-top: 104px;*/
+    padding-top: 84px;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 48px;
+
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.result_answers {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content:flex-start;
+
+    background-color: #AAADB3;
+
+    padding: 20px;
+}
+
+.result_statistic {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+
+    padding-right: 30px;
+    padding-top: 30px;
+
+    width: 25%;
+    /*height: 1080px;*/
+    /*width: 508px;*/
+    /*background-color: #FAFAFA;*/
+    background-color: #FF5A00;
+    box-shadow: -2px 0 16px 0 rgba(0,0,0,0.16);
+}
+
+.result_statistic div {
+    margin: 30px;
+}

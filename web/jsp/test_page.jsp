@@ -57,9 +57,7 @@
                 <%--<input type="checkbox" idInDb="answer4" name="subscribe" value="answerFourth">--%>
                 <%--<label for="answer1">Ответ 4</label>--%>
                 <%--</div>--%>
-                <a href="/controller?command=NEXT_QUESTION">Далее</a>
                 <input type="submit" value="Далее">
-                <input class="btn_fill" type="submit" name="submit" value="Войти">
             </form>
         </div>
         <div>

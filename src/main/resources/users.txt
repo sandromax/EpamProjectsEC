@@ -1,0 +1,5 @@
+*~~/index.jsp,/
+admin~adminSuperPassword~/*
+user1~u1pass~/user1.jsp
+user2~u2pass~/user2.jsp
+moderator~moderpass~/user1.jsp,/user2.jsp

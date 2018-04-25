@@ -1,0 +1,37 @@
+.content {
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: space-between;*/
+
+    /*padding-top: 104px;*/
+    padding-top: 84px;
+    padding-left: 48px;
+    padding-right: 48px;
+    padding-bottom: 48px;
+
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.students {
+    width: 30%;
+    background-color: #05AB2F;
+
+}
+
+.success {
+    width: 70%;
+    background-color: #FC1C1C;
+
+}

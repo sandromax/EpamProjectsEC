@@ -1,5 +1,6 @@
 package org.sandromax.fastest.controller.command.impl;
 
+import org.apache.log4j.Logger;
 import org.sandromax.fastest.controller.command.Command;
 import org.sandromax.fastest.controller.until.constants.Pages;
 import org.sandromax.fastest.domain.test.Subject;
@@ -11,9 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+//import org.apache.log4j.Logger;
+
+
+
 public class CommandSignIn implements Command {
     @Override
     public String execute(HttpServletRequest request) {
+
+//        Logger logger = (Logger)request.getServletContext().getAttribute("log4");
+//         Logger logger = Logger.getLogger(CommandSignIn.class);
+
+
         String page;    // = Pages.SIGN_IN_PAGE;
 
         sessionLogOut(request);
@@ -48,6 +58,8 @@ public class CommandSignIn implements Command {
             session.setAttribute("list", subjects);
 
             page = Pages.SUBJECTS_CATALOG;
+//            logger.info("entered by " + nameDb);
+
         } else {
             page = Pages.SIGN_IN_PAGE;
             request.setAttribute("error", "wrong email or password");

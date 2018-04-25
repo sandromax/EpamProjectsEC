@@ -41,7 +41,7 @@ public class CommandTestPage implements Command {
         Student student = UserDao.findStudentByName(studentName);
 
         TestProvider testProvider = new TestProvider();
-        testProvider.init(student, theme, 4);   //Exceptions
+        testProvider.init(student, theme, 2);   //Exceptions
 //        java.util.NoSuchElementException
 //        java.util.LinkedList.removeLast(LinkedList.java:283)
 //        org.sandromax.fastest.domain.testing.TestProvider.cut(TestProvider.java:131)

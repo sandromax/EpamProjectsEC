@@ -20,6 +20,12 @@ public class Subject {
         this.lang = lang;
     }
 
+    public Subject(int idInDb, String name, Locale lang) {
+        this.idInDb = idInDb;
+        this.name = name;
+        this.lang = lang;
+    }
+
     public int getId() {
         return idInDb;
     }
